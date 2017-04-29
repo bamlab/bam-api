@@ -1,7 +1,7 @@
 # represent a book
 type Book {
   # the book id
-  id: Int!
+  id: ID!
   # the book title
   name: String!
   # the book author

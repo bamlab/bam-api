@@ -7,7 +7,7 @@ enum BAMMER_ROLE {
 
 # represent a bammer
 type Bammer {
-  id: Int!
+  id: ID!
   # the bammer role
   role: BAMMER_ROLE
   # the bammer full name

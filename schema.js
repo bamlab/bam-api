@@ -9,7 +9,8 @@ const typeDefs = require('./typeDefs');
 // create a schema
 const schema = makeExecutableSchema({ typeDefs });
 
-// add mocks to the schema
-addMockFunctionsToSchema({ schema });
+// add mocks to the schema, preserving the existing reseolver (none for the time beeing)
+const mocks = require('./mocks');
+addMockFunctionsToSchema({ schema, mocks, preserveResolvers: true });
 
 module.exports = schema;

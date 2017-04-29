@@ -6,6 +6,7 @@
   "author": "Tycho Tatitscheff",
   "license": "MIT",
   "dependencies": {
+    "casual": "^1.5.12",
     "config": "^1.25.1",
     "graphql": "^0.9.5",
     "graphql-server-koa": "^0.7.2",
