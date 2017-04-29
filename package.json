@@ -6,6 +6,8 @@
   "author": "Tycho Tatitscheff",
   "license": "MIT",
   "dependencies": {
+    "config": "^1.25.1",
+    "js-yaml": "^3.8.3",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.1.1"

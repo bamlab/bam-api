@@ -9,14 +9,13 @@ const koaRouter = require('koa-router');
 // Import koa 2 bodyparser, to parse the html bodycontaining the query
 // and pass the decoded string to graphql
 const koaBody = require('koa-bodyparser');
+// Use config to externalize the configuration
+const config = require('config');
 
 // create a new app
 const app = new koa();
 // create a new router, not really usefull for now
 const router = new koaRouter();
-// let port be a constant
-// @todo : install something to manage the config, under multiple environement
-const PORT = 3000;
 
 // use the body middlleware, to decode the body of the request
 app.use(koaBody());
@@ -26,4 +25,4 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 // start the app and listen to incomming request
-app.listen(PORT);
+app.listen(config.get('Server.port'));
