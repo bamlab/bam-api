@@ -1,0 +1,8 @@
+{
+  "name": "tql",
+  "version": "1.0.0",
+  "description": "BAM example GraphQL Api",
+  "main": "index.js",
+  "author": "Tycho Tatitscheff",
+  "license": "MIT"
+}
