@@ -9,6 +9,8 @@ const koaRouter = require('koa-router');
 // Import koa 2 bodyparser, to parse the html bodycontaining the query
 // and pass the decoded string to graphql
 const koaBody = require('koa-bodyparser');
+// Import helmet middleware to add extra security for free
+const helmet = require('koa-helmet');
 // Use config to externalize the configuration
 const config = require('config');
 // import graphqlKoa and graphiql
@@ -18,6 +20,9 @@ const { graphqlKoa, graphiqlKoa } = require('graphql-server-koa');
 const app = new koa();
 // create a new router, not really usefull for now
 const router = new koaRouter();
+
+// use the helmet middleware, to offfer a bit of extra security
+app.use(helmet());
 
 // use the body middlleware, to decode the body of the request
 app.use(koaBody());
