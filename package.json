@@ -4,5 +4,10 @@
   "description": "BAM example GraphQL Api",
   "main": "index.js",
   "author": "Tycho Tatitscheff",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.1.1"
+  }
 }
