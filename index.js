@@ -1,5 +1,5 @@
 /**
- * @description: this file load koa 2
+ * @description: this file starts the web server
  */
 
 // Import koa 2, the modern express
@@ -11,6 +11,8 @@ const koaRouter = require('koa-router');
 const koaBody = require('koa-bodyparser');
 // Use config to externalize the configuration
 const config = require('config');
+// import graphqlKoa and graphiql
+const { graphqlKoa, graphiqlKoa } = require('graphql-server-koa');
 
 // create a new app
 const app = new koa();
@@ -20,7 +22,13 @@ const router = new koaRouter();
 // use the body middlleware, to decode the body of the request
 app.use(koaBody());
 
-// use the router routes, once defined
+// import the schema and mount it under /graphql
+const schema = require('./schema');
+router.post('/graphql', graphqlKoa({ schema }));
+// create the /graphiql endpoint and connect it to the /graphql
+router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
+
+// use the router routes and restrict the method
 app.use(router.routes());
 app.use(router.allowedMethods());
 

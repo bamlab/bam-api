@@ -1,0 +1,21 @@
+enum BAMMER_ROLE {
+  DEV
+  SALE
+  GROWTH
+  ADMIN
+}
+
+# represent a bammer
+type Bammer {
+  id: Int!
+  # the bammer role
+  role: BAMMER_ROLE
+  # the bammer full name
+  name: String @deprecated(reason: "Use firstName and lastName instead")
+  # the bammer firstName
+  firstName: String
+  # the bammer lastName
+  lastName: String
+  # the books currently borrowed by the bammer
+  booksCurrentlyBorrowed: [Book]
+}
