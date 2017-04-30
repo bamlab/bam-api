@@ -29,7 +29,10 @@ app.use(koaBody());
 
 // import the schema and mount it under /graphql
 const schema = require('./schema');
-router.post('/graphql', graphqlKoa({ schema }));
+
+const models = require('./models');
+const context = Object.assign({}, models);
+router.post('/graphql', graphqlKoa({ schema, context }));
 // create the /graphiql endpoint and connect it to the /graphql
 router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
 

@@ -1,0 +1,8 @@
+Database:
+  client: 'sqlite3'
+  connection:
+    filename: './db.sqlite'
+  seeds:
+    directory: './seeds/development'
+  useNullAsDefault: true
+  debug: false
