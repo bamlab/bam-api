@@ -1,9 +1,13 @@
 /**
- * Devlopment fixtures
+ * Development fixtures
+ *
+ * @flow
  */
-const uuidV4 = require('uuid/v4');
 
-exports.seed = function(knex, Promise) {
+const uuidV4 = require('uuid/v4');
+const knex = require('knex');
+
+exports.seed = function(knex: knex, Promise: typeof Promise) {
   // Deletes ALL existing entries
   return Promise.all([
     knex('Bammer').del().then(function() {

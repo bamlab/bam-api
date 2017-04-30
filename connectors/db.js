@@ -1,5 +1,7 @@
 /**
  * @description: this file contains the connection to the database
+ *
+ * @flow
  */
 
 const config = require('config');

@@ -1,5 +1,7 @@
 /**
  * @description: this helper concatenate all *.gql files to export an array of types
+ *
+ * @flow
  */
 
 // load fs and path from node

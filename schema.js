@@ -1,6 +1,9 @@
 /**
  * @description: this file defines the graphql schema
+ *
+ * @flow
  */
+
 const {
   makeExecutableSchema,
   addResolveFunctionsToSchema,

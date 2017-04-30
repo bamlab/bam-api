@@ -1,7 +1,10 @@
 /**
  * @description: this file starts the web server
+ *
+ * @flow
  */
 
+require('flow-remove-types/register');
 // Import koa 2, the modern express
 const koa = require('koa');
 // Import koa 2router, so we can mount graphQl under the /graphql endpoint

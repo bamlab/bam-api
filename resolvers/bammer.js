@@ -1,5 +1,7 @@
 /**
  * Resolver for the connection between Bammer and other model
+ *
+ * @flow
  */
 module.exports = {
   Bammer: {
@@ -10,7 +12,7 @@ module.exports = {
      * @param {Context} ctx 
      * @returns 
      */
-    booksCurrentlyBorrowed(bammer, _, ctx) {
+    booksCurrentlyBorrowed(bammer: any, _: {}, ctx: Context) {
       return ctx.book.getByBorrowerId(bammer.id);
     }
   }

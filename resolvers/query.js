@@ -1,19 +1,22 @@
 /**
  * Root resolvers for query type
+ *
+ * @flow
  */
+
 module.exports = {
   Query: {
-    allBooks(root, _, context) {
-      return context.book.getAll();
+    allBooks(root: {}, _: {}, ctx: Context) {
+      return ctx.book.getAll();
     },
-    book(root, args, context) {
-      return context.book.getById(args.id);
+    book(root: {}, args: { id: String }, ctx: Context) {
+      return ctx.book.getById(args.id);
     },
-    allBammers(root, _, context) {
-      return context.bammer.getAll();
+    allBammers(root: {}, _: {}, ctx: Context) {
+      return ctx.bammer.getAll();
     },
-    bammer(root, args, context) {
-      return context.bammer.getById(args.id);
+    bammer(root: {}, args: { id: String }, ctx: Context) {
+      return ctx.bammer.getById(args.id);
     }
   }
 };

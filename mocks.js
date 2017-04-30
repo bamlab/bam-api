@@ -1,6 +1,9 @@
 /**
  * @description: this file allows to have better mocks, by using a dedicated mock library
+ *
+ * @flow
  */
+
 const casual = require('casual');
 const { MockList } = require('graphql-tools');
 

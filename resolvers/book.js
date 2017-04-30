@@ -1,16 +1,16 @@
 /**
  * Get the connections between Book and other model
+ *
+ * @flow
  */
 module.exports = {
   Book: {
     /**
      * Resolve the connection of the bammer currently borrowing one book
      * 
-     * @param {Book} book
-     * @param {Context} ctx 
      * @returns 
      */
-    currentlyBorrowedBy(book, _, ctx) {
+    currentlyBorrowedBy(book: Book, _: {}, ctx: Context) {
       return ctx.bammer.getById(book.bammerBorrowingId);
     }
   }
