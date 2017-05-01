@@ -34,6 +34,17 @@ class BookModel {
   static async getAll(): Promise<Array<BookType>> {
     return await db.select().table('Book');
   }
+  /**
+   * Get the corresponding list of bammer of a given list of uuid
+   *
+   * Used for batching in dataloader
+   * 
+   * @static
+   * @memberOf BammerModel
+   */
+  static async getByListofIds(ids: Array<string>): Promise<Array<BookType | Error>> {
+    return await db.select().table('Book').whereIn('id', ids);
+  }
 }
 
 module.exports = BookModel;

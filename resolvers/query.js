@@ -3,20 +3,22 @@
  *
  * @flow
  */
+const BammerLoader = require('../loaders/bammer');
+const BookLoader = require('../loaders/bammer');
 
 module.exports = {
   Query: {
     allBooks(root: {}, _: {}, ctx: ContextType) {
-      return ctx.models.book.getAll();
+      return BookLoader.loadAll(ctx);
     },
     book(root: {}, args: { id: string }, ctx: ContextType) {
-      return ctx.dataloaders.book.load(args.id);
+      return BookLoader.load(ctx, args.id);
     },
     allBammers(root: {}, _: {}, ctx: ContextType) {
-      return ctx.models.bammer.getAll();
+      return BammerLoader.loadAll(ctx);
     },
     bammer(root: {}, args: { id: string }, ctx: ContextType) {
-      return ctx.dataloaders.bammer.load(args.id);
+      return BammerLoader.load(ctx, args.id);
     }
   }
 };

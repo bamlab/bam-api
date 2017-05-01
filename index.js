@@ -44,7 +44,7 @@ router.post(
       return Object.assign({}, dataloaders, { [loaderKey]: loaders[loaderKey].getLoader() });
     }, {});
     // create a context for each request
-    const context = Object.assign({}, { models, dataloaders, req });
+    const context = Object.assign({}, { models, dataloaders, loaders });
     return {
       schema,
       context

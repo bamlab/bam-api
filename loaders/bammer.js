@@ -1,7 +1,7 @@
 /**
  * @description: this file contains the Bammer buisness object, in the context of a given http request
  *
- * This file will handle batching and caching, as well a hhtp authentication, scoping and so on
+ * This file will handle batching and caching, as well a http authentication, scoping and so on
  *
  * @flow
  */
@@ -25,19 +25,26 @@ class Bammer {
   }
   // get the loader for the request, in order to batch and cach the db calls
   static getLoader() {
+    // $FlowFixMe
     return new DataLoader(ids => BammerModel.getByListofIds(ids));
   }
   static async load({ user: viewer, dataloaders }, id) {
     // return null if no id is given
     if (!id) return null;
     // return null if no id is given
-    const data = await dataloaders.BammerLoader.load(id);
+    const data = await dataloaders.bammer.load(id);
     if (!data) return null;
 
     return new Bammer(data, viewer);
   }
+  static async loadAll({ user: viewer, dataloaders }) {
+    return (await BammerModel.getAll()).map(row => {
+      dataloaders.bammer.prime(row.id, row);
+      return new Bammer(row, viewer);
+    });
+  }
   static clearCache({ dataloaders }, id) {
-    return dataloaders.BammerLoader.clear(id.toString());
+    return dataloaders.bammer.clear(id.toString());
   }
 }
 

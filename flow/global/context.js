@@ -15,5 +15,9 @@ declare type ContextType = {
   dataloaders: {
     book: DataLoader,
     bammer: DataLoader
+  },
+  loaders: {
+    book: *,
+    bammer: *
   }
 };

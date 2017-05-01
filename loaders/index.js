@@ -1,3 +1,4 @@
 module.exports = {
-  bammer: require('./bammer')
+  bammer: require('./bammer'),
+  book: require('./book')
 };
