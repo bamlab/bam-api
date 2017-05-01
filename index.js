@@ -32,10 +32,25 @@ app.use(koaBody());
 
 // import the schema and mount it under /graphql
 const schema = require('./schema');
-
 const models = require('./models');
-const context = Object.assign({}, models);
-router.post('/graphql', graphqlKoa({ schema, context }));
+
+// get the dataloader for each request
+const loaders = require('./loaders');
+router.post(
+  '/graphql',
+  graphqlKoa(req => {
+    // build the data loader map, using reduce
+    const dataloaders = Object.keys(loaders).reduce((dataloaders, loaderKey) => {
+      return Object.assign({}, dataloaders, { [loaderKey]: loaders[loaderKey].getLoader() });
+    }, {});
+    // create a context for each request
+    const context = Object.assign({}, { models, dataloaders, req });
+    return {
+      schema,
+      context
+    };
+  })
+);
 // create the /graphiql endpoint and connect it to the /graphql
 router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
 

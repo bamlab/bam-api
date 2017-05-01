@@ -1,10 +1,10 @@
-declare type BAMMER_ROLE = 'DEV' | 'SALE' | 'GROWTH' | 'ADMIN';
+declare type BAMMER_ROLE_Type = 'DEV' | 'SALE' | 'GROWTH' | 'ADMIN';
 
-declare type Bammer = {
-  id: String,
-  role: BAMMER_ROLE,
-  name: String,
-  firstName: String,
-  lastName: String,
-  booksCurrentlyBorrowed: Array<Book>
+declare type BammerType = {
+  id: string,
+  role: BAMMER_ROLE_Type,
+  name: string,
+  firstName: string,
+  lastName: string,
+  booksCurrentlyBorrowed: Array<BookType>
 };

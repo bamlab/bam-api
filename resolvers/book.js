@@ -10,8 +10,8 @@ module.exports = {
      * 
      * @returns 
      */
-    currentlyBorrowedBy(book: Book, _: {}, ctx: Context) {
-      return ctx.bammer.getById(book.bammerBorrowingId);
+    currentlyBorrowedBy(book: BookType, _: {}, ctx: ContextType) {
+      return ctx.dataloaders.bammer.load(book.bammerBorrowingId);
     }
   }
 };

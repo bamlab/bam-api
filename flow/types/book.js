@@ -1,7 +1,7 @@
-declare type Book = {
-  id: String,
-  name: String,
-  author: String,
-  bammerBorrowingId: String,
-  currentlyBorrowedBy: ?Bammer
+declare type BookType = {
+  id: string,
+  name: string,
+  author: string,
+  bammerBorrowingId: string,
+  currentlyBorrowedBy: ?BammerType
 };

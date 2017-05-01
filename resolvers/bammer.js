@@ -12,8 +12,8 @@ module.exports = {
      * @param {Context} ctx 
      * @returns 
      */
-    booksCurrentlyBorrowed(bammer: any, _: {}, ctx: Context) {
-      return ctx.book.getByBorrowerId(bammer.id);
+    booksCurrentlyBorrowed(bammer: BammerType, _: {}, ctx: ContextType) {
+      return ctx.models.book.getByBorrowerId(bammer.id);
     }
   }
 };

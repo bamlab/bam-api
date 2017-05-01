@@ -6,17 +6,17 @@
 
 module.exports = {
   Query: {
-    allBooks(root: {}, _: {}, ctx: Context) {
-      return ctx.book.getAll();
+    allBooks(root: {}, _: {}, ctx: ContextType) {
+      return ctx.models.book.getAll();
     },
-    book(root: {}, args: { id: String }, ctx: Context) {
-      return ctx.book.getById(args.id);
+    book(root: {}, args: { id: string }, ctx: ContextType) {
+      return ctx.dataloaders.book.load(args.id);
     },
-    allBammers(root: {}, _: {}, ctx: Context) {
-      return ctx.bammer.getAll();
+    allBammers(root: {}, _: {}, ctx: ContextType) {
+      return ctx.models.bammer.getAll();
     },
-    bammer(root: {}, args: { id: String }, ctx: Context) {
-      return ctx.bammer.getById(args.id);
+    bammer(root: {}, args: { id: string }, ctx: ContextType) {
+      return ctx.dataloaders.bammer.load(args.id);
     }
   }
 };
