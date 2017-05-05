@@ -23,28 +23,33 @@ class Bammer {
     // handle the deprecated properties here
     this.name = [data.firstName, data.lastName].join(' ');
   }
-  // get the loader for the request, in order to batch and cach the db calls
-  static getLoader() {
-    // $FlowFixMe
-    return new DataLoader(ids => BammerModel.getByListofIds(ids));
+  // get the loaders for the request, in order to batch and cach the db calls
+  static getLoaders() {
+    const primeLoaders = (bammers: Array<BammerType>) => {
+      for (let bammer of bammers) {
+        byId.prime(bammer.id, bammer);
+      }
+    };
+    // $FlowFixMe bug with commonjs version, shoudl be fixed if we go to ES6
+    const byId = new DataLoader(ids => BammerModel.getByListofIds(ids));
+    return {
+      byId,
+      primeLoaders
+    };
   }
   static async load({ user: viewer, dataloaders }, id) {
     // return null if no id is given
     if (!id) return null;
     // return null if no id is given
-    const data = await dataloaders.bammer.load(id);
+    const data = await dataloaders.bammer.byId.load(id);
     if (!data) return null;
 
     return new Bammer(data, viewer);
   }
   static async loadAll({ user: viewer, dataloaders }) {
-    return (await BammerModel.getAll()).map(row => {
-      dataloaders.bammer.prime(row.id, row);
-      return new Bammer(row, viewer);
-    });
-  }
-  static clearCache({ dataloaders }, id) {
-    return dataloaders.bammer.clear(id.toString());
+    const data = await BammerModel.getAll();
+    dataloaders.bammer.primeLoaders(data);
+    return data.map(row => new Bammer(row, viewer));
   }
 }
 

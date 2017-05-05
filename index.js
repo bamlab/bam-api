@@ -41,10 +41,10 @@ router.post(
   graphqlKoa(req => {
     // build the data loader map, using reduce
     const dataloaders = Object.keys(loaders).reduce((dataloaders, loaderKey) => {
-      return Object.assign({}, dataloaders, { [loaderKey]: loaders[loaderKey].getLoader() });
+      return Object.assign({}, dataloaders, { [loaderKey]: loaders[loaderKey].getLoaders() });
     }, {});
     // create a context for each request
-    const context = Object.assign({}, { models, dataloaders, loaders });
+    const context = Object.assign({}, { dataloaders });
     return {
       schema,
       context

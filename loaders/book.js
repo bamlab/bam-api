@@ -18,27 +18,51 @@ class Book {
     this.author = data.author;
   }
   // get the loader for the request, in order to batch and cach the db calls
-  static getLoader() {
+  // https://github.com/facebook/dataloader#loading-by-alternative-keys
+  static getLoaders() {
+    const primeLoaders = (books: Array<BookType>) => {
+      for (let book of books) {
+        book.bammerBorrowingId && byBorrowingUserId.prime(book.bammerBorrowingId, book);
+        byId.prime(book.id, book);
+      }
+    };
     // $FlowFixMe
-    return new DataLoader(ids => BokkModel.getByListofIds(ids));
+    const byId = new DataLoader(ids => BookModel.getByListofIds(ids));
+    // Fix me : this loader does not work
+    // DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise of an Array of the same length as the Array of keys.
+    // $FlowFixMe
+    const byBorrowingUserId = new DataLoader(ids => BookModel.getByBorrowerId(ids));
+    return {
+      byId,
+      byBorrowingUserId,
+      primeLoaders
+    };
   }
   static async load({ user: viewer, dataloaders }, id) {
     // return null if no id is given
     if (!id) return null;
     // return null if no id is given
-    const data = await dataloaders.book.load(id);
+    const data = await dataloaders.book.byId.load(id);
+    dataloaders.book.primeLoaders(data);
     if (!data) return null;
 
     return new Book(data, viewer);
   }
-  static async loadAll({ user: viewer, dataloaders }) {
-    return (await BookModel.getAll()).map(row => {
-      dataloaders.book.prime(row.id, row);
-      return new Book(row, viewer);
-    });
+  static async loadByBorrowing({ user: viewer, dataloaders }, id) {
+    // return null if no id is given
+    if (!id) return null;
+    // return null if no id is given
+    // @todo : refactore this to use loader
+    const data = await BookModel.getByBorrowerId(id);
+    dataloaders.book.primeLoaders(data);
+    if (!data) return null;
+
+    return data.map(row => new Book(row, viewer));
   }
-  static clearCache({ dataloaders }, id) {
-    return dataloaders.BammerLoader.clear(id.toString());
+  static async loadAll({ user: viewer, dataloaders }) {
+    const data = await BookModel.getAll();
+    dataloaders.book.primeLoaders(data);
+    return data.map(row => new Book(row, viewer));
   }
 }
 

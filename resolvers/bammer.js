@@ -3,6 +3,8 @@
  *
  * @flow
  */
+
+const BookLoader = require('../loaders/book');
 module.exports = {
   Bammer: {
     /**
@@ -13,7 +15,7 @@ module.exports = {
      * @returns 
      */
     booksCurrentlyBorrowed(bammer: BammerType, _: {}, ctx: ContextType) {
-      return ctx.models.book.getByBorrowerId(bammer.id);
+      return BookLoader.loadByBorrowing(ctx, bammer.id);
     }
   }
 };

@@ -22,7 +22,7 @@ class BookModel {
    * @static
    * @memberOf BookModel
    */
-  static async getByBorrowerId(id: string): Promise<BookType> {
+  static async getByBorrowerId(id: string): Promise<Array<BookType>> {
     return await db.select().table('Book').where('bammerBorrowingId', id);
   }
   /**
