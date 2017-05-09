@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Auth0-VanillaJS</title>
+  <meta charset="utf-8">
+
+  <!-- Auth0 lock script -->
+  <script src="//cdn.auth0.com/js/lock/10.15.1/lock.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD"
+    crossorigin="anonymous">
+  <script type="text/javascript">
+    var AUTH0_CLIENT_ID = 'X1hVKtRbNWrpj4puBwjIJsf9ghTaMakZ';
+    var AUTH0_DOMAIN = 'tychot.eu.auth0.com';
+    var AUTH0_CALLBACK_URL = window.location.href;
+  </script>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
+        auth: {
+          params: {
+            scope: 'openid email user_metadata'
+          },
+        }
+      });
+
+      // buttons
+      var btn_login = document.getElementById('btn-login');
+      var btn_logout = document.getElementById('btn-logout');
+      var btn_graphiql = document.getElementById('btn-graphiql');
+
+      btn_login.addEventListener('click', function () {
+        lock.show();
+      });
+
+      btn_logout.addEventListener('click', function () {
+        logout();
+      });
+
+      btn_graphiql.addEventListener('click', function () {
+        location.href = "/graphiql"
+      });
+
+      lock.on('authenticated', function (authResult) {
+        lock.getProfile(authResult.idToken, function (error, profile) {
+          if (error) {
+            // Handle error
+            return;
+          }
+          localStorage.setItem('id_token', authResult.idToken);
+          // Display user information
+          show_profile_info(profile);
+        });
+      });
+
+      //retrieve the profile:
+      var retrieve_profile = function () {
+        var id_token = localStorage.getItem('id_token');
+        if (id_token) {
+          lock.getProfile(id_token, function (err, profile) {
+            if (err) {
+              return alert('There was an error getting the profile: ' + err.message);
+            }
+            // Display user information
+            show_profile_info(profile);
+          });
+        }
+      };
+
+      var show_profile_info = function (profile) {
+        var avatar = document.getElementById('avatar');
+        document.getElementById('nickname').textContent = profile.nickname;
+        btn_login.style.display = 'none';
+        avatar.src = profile.picture;
+        avatar.style.display = 'block';
+        avatar.style.width = '200px';
+        btn_logout.style.display = 'block';
+        btn_graphiql.style.display = 'block';
+      };
+
+      var logout = function () {
+        localStorage.removeItem('id_token');
+        window.location.href = '/graphiql';
+      };
+
+      retrieve_profile();
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh">
+  <img alt="avatar" id="avatar" style="display:none;">
+  <p>Welcome <span id="nickname"></span></p>
+  <button type="submit" id="btn-login" class="pure-button pure-button-primary">Sign In</button>
+  <button type="submit" id="btn-graphiql" style="display:none; margin:20px" class="pure-button pure-button-primary">Return to Graphiql</button>
+  <button type="submit" id="btn-logout" style="display:none;background: rgb(202, 60, 60);color: white; margin:20px" class="pure-button">Sign Out</button>
+</body>
+
+</html>

@@ -1,7 +1,11 @@
 enum BAMMER_ROLE {
+  # A developer
   DEV
+  # A sale
   SALE
+  # A member of growth team
   GROWTH
+  # An admin fi
   ADMIN
 }
 
@@ -16,6 +20,8 @@ type Bammer {
   firstName: String
   # the bammer lastName
   lastName: String
+  # the bammer email
+  email: String
   # the books currently borrowed by the bammer
   booksCurrentlyBorrowed: [Book]
 }

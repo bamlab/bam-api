@@ -13,9 +13,24 @@ exports.seed = function(knex: knex, Promise: typeof Promise) {
     knex('Bammer').del().then(function() {
       // Insert three Bammer
       return knex('Bammer').insert([
-        { id: 'd906656b-2b4f-4afe-bcd5-34c7d50ab035', firstName: 'Marek', lastName: 'Kalnik' },
-        { id: 'ce53da3a-da7d-4893-a2a1-b48ffdbb4644', firstName: 'Tycho', lastName: 'Tatitscheff' },
-        { id: 'ed09776a-6c35-4527-9c1f-d333ac9f8abf', firstName: 'Florian', lastName: 'Rival' }
+        {
+          id: 'd906656b-2b4f-4afe-bcd5-34c7d50ab035',
+          firstName: 'Marek',
+          lastName: 'Kalnik',
+          email: 'marek@example.com'
+        },
+        {
+          id: 'ce53da3a-da7d-4893-a2a1-b48ffdbb4644',
+          firstName: 'Tycho',
+          lastName: 'Tatitscheff',
+          email: 'tychot@bam.tech'
+        },
+        {
+          id: 'ed09776a-6c35-4527-9c1f-d333ac9f8abf',
+          firstName: 'Florian',
+          lastName: 'Rival',
+          email: 'flo@example.com'
+        }
       ]);
     }),
     // Deletes ALL existing entries

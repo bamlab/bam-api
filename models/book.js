@@ -14,7 +14,7 @@ class BookModel {
    * @memberOf BookModel
    */
   static async getById(id: string): Promise<BookType> {
-    return await db.select().table('Book').where('id', id);
+    return await db.first().table('Book').where('id', id);
   }
   /**
    * Get Books that one bammer is currently borrowing

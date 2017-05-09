@@ -6,3 +6,14 @@ Database:
     directory: './seeds/development'
   useNullAsDefault: true
   debug: false
+Security:
+  jwks:
+    cache: true
+    rateLimit: true
+    jwksRequestsPerMinute: 5
+    jwksUri: 'https://tychot.eu.auth0.com/.well-known/jwks.json'
+  jwt:
+    audience: X1hVKtRbNWrpj4puBwjIJsf9ghTaMakZ
+    issuer: 'https://tychot.eu.auth0.com/'
+    debug: true
+    algorithms: [ 'RS256' ]

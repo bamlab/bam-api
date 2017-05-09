@@ -6,5 +6,6 @@ declare type BammerType = {
   name: string,
   firstName: string,
   lastName: string,
+  email: string,
   booksCurrentlyBorrowed: Array<BookType>
 };

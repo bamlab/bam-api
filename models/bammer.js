@@ -14,7 +14,18 @@ class BammerModel {
    * @memberOf BammerModel
    */
   static async getById(id: string): Promise<BammerType> {
-    return await db.select().table('Bammer').where('id', id);
+    return await db.first().table('Bammer').where('id', id);
+  }
+  /**
+   * Get a bammer by email
+   *
+   * Used for authentication
+   *
+   * @static
+   * @memberOf BammerModel
+   */
+  static async getByEmail(email: string): Promise<BammerType> {
+    return await db.first().table('Bammer').where('email', email);
   }
   /**
    * Get every bammer

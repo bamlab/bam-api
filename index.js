@@ -18,6 +18,12 @@ const helmet = require('koa-helmet');
 const config = require('config');
 // import graphqlKoa and graphiql
 const { graphqlKoa, graphiqlKoa } = require('graphql-server-koa');
+// import jwt-verification
+const koaJwt = require('koa-jwt');
+// and jwks to delegate the auth to auth0
+const jwksRsa = require('jwks-rsa');
+// import view to render the static login page
+const koaViews = require('koa-views');
 
 // create a new app
 const app = new koa();
@@ -30,6 +36,23 @@ app.use(helmet());
 // use the body middlleware, to decode the body of the request
 app.use(koaBody());
 
+app.use(
+  koaViews(__dirname + '/views', {
+    map: {
+      html: 'ect'
+    }
+  })
+);
+const jwtConfig = Object.assign(
+  {},
+  {
+    secret: jwksRsa.koaJwtSecret(config.get('Security.jwks'))
+  },
+  config.get('Security.jwt'),
+  { passthrough: true }
+);
+app.use(koaJwt(jwtConfig));
+
 // import the schema and mount it under /graphql
 const schema = require('./schema');
 const models = require('./models');
@@ -38,13 +61,19 @@ const models = require('./models');
 const loaders = require('./loaders');
 router.post(
   '/graphql',
-  graphqlKoa(req => {
+  graphqlKoa(async ({ state }) => {
+    let user;
+    const email = state.user && state.user.email;
+    const isBammer = /^\w+@bam\.tech$/.test(email);
+    if (email && isBammer) {
+      user = await models.bammer.getByEmail(email);
+    }
     // build the data loader map, using reduce
     const dataloaders = Object.keys(loaders).reduce((dataloaders, loaderKey) => {
       return Object.assign({}, dataloaders, { [loaderKey]: loaders[loaderKey].getLoaders() });
     }, {});
     // create a context for each request
-    const context = Object.assign({}, { dataloaders });
+    const context = Object.assign({}, { dataloaders, user, isBammer });
     return {
       schema,
       context
@@ -52,7 +81,13 @@ router.post(
   })
 );
 // create the /graphiql endpoint and connect it to the /graphql
-router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
+router.get('/graphiql', ctx => {
+  return ctx.render('graphiql', {});
+});
+
+router.get('/login', ctx => {
+  return ctx.render('login', {});
+});
 
 // use the router routes and restrict the method
 app.use(router.routes());

@@ -14,7 +14,8 @@ class Bammer {
   lastName: $PropertyType<BammerType, 'lastName'>;
   role: $PropertyType<BammerType, 'role'>;
   name: $PropertyType<BammerType, 'name'>;
-  constructor(data: BammerType, viewer: {}) {
+  email: $PropertyType<BammerType, 'email'>;
+  constructor(data: BammerType, viewer: { id?: string }) {
     this.id = data.id;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
@@ -22,6 +23,10 @@ class Bammer {
 
     // handle the deprecated properties here
     this.name = [data.firstName, data.lastName].join(' ');
+
+    if (viewer.id === data.id) {
+      this.email = data.email;
+    }
   }
   // get the loaders for the request, in order to batch and cach the db calls
   static getLoaders() {
@@ -46,7 +51,9 @@ class Bammer {
 
     return new Bammer(data, viewer);
   }
-  static async loadAll({ user: viewer, dataloaders }) {
+  static async loadAll({ user: viewer, isBammer, dataloaders }) {
+    if (!isBammer) throw new Error('Must be connected with a bam email address to use the service');
+
     const data = await BammerModel.getAll();
     dataloaders.bammer.primeLoaders(data);
     return data.map(row => new Bammer(row, viewer));
