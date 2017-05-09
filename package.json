@@ -15,7 +15,7 @@
     "graphql-server-koa": "^0.7.2",
     "graphql-tools": "^0.11.0",
     "js-yaml": "^3.8.3",
-    "jwks-rsa": "git+ssh://git@github.com/sdd/node-jwks-rsa.git#koa-jwt-integration",
+    "@tychot/jwks-rsa": "1.1.2",
     "knex": "^0.13.0",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",

@@ -1,9 +1,9 @@
 Database:
   client: 'sqlite3'
   connection:
-    filename: './db.sqlite'
+    filename: './db/dev.sqlite'
   seeds:
-    directory: './seeds/development'
+    directory: './db/seeds/development'
   useNullAsDefault: true
   debug: false
 Security:
