@@ -4,4 +4,4 @@ WORKDIR /srv
 COPY . /srv
 RUN yarn install
 
-CMD [ "node index.js" ]
+CMD [ "node","index.js" ]

@@ -1,1 +1,8 @@
 *.sqlite
+
+!docker/certs/.gitkeep
+docker/certs/*
+!docker/conf.d/.gitkeep
+docker/conf.d/*
+!docker/vhost.d/.gitkeep
+docker/vhost.d/*
