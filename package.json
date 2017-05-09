@@ -26,5 +26,8 @@
     "pg": "^6.1.5",
     "sqlite3": "^3.1.8",
     "uuid": "^3.0.1"
+  },
+  "scripts": {
+    "start": "knex migrate:latest && node index.js"
   }
 }

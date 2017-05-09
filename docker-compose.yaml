@@ -61,11 +61,11 @@ services:
       - proxy-tier
   db:
     restart: always
-    image: postgres:9.6-alpine
+    image: postgres:9.6
     container_name: db
     environment:
-      - POSTGRES_USER:'tql'
-      - POSTGRES_DB:'tql'
+      - POSTGRES_USER=tql
+      - POSTGRES_PASSWORD=itstqldude
     volumes:
       - database:/var/lib/postgresql/data
     networks:
