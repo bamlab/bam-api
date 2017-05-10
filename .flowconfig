@@ -7,6 +7,7 @@ db/flow
 koa/flow
 
 [options]
+unsafe.enable_getters_and_setters=true
 
 [version]
 ^0.46.0
