@@ -19,6 +19,6 @@ module.exports = {
     },
     bammer(root: {}, args: { id: string }, ctx: ContextType) {
       return BammerLoader.load(ctx, args.id);
-    }
-  }
+    },
+  },
 };

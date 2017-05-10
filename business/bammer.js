@@ -39,7 +39,7 @@ class Bammer {
     const byId = new DataLoader(ids => BammerModel.getByListofIds(ids));
     return {
       byId,
-      primeLoaders
+      primeLoaders,
     };
   }
   static async load({ user: viewer, dataloaders }, id): Promise<?Bammer> {

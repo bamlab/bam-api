@@ -18,7 +18,7 @@ const helmet = require('koa-helmet');
 // Use config to externalize the configuration
 const config = require('config');
 // import graphqlKoa and graphiql
-const { graphqlKoa, graphiqlKoa } = require('graphql-server-koa');
+const { graphqlKoa } = require('graphql-server-koa');
 // import jwt-verification
 const koaJwt = require('koa-jwt');
 // and jwks to delegate the auth to auth0
@@ -42,8 +42,8 @@ const path = require('path');
 app.use(
   koaViews(path.join(__dirname, 'views'), {
     map: {
-      html: 'ect'
-    }
+      html: 'ect',
+    },
   })
 );
 
@@ -51,7 +51,7 @@ app.use(
 const jwtConfig = Object.assign(
   {},
   {
-    secret: jwksRsa.koaJwtSecret(config.get('Security.jwks'))
+    secret: jwksRsa.koaJwtSecret(config.get('Security.jwks')),
   },
   config.get('Security.jwt'),
   { passthrough: true }
@@ -81,7 +81,7 @@ router.post(
     const context = Object.assign({}, { dataloaders, user, isBammer });
     return {
       schema,
-      context
+      context,
     };
   })
 );

@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "flowtype",
+    "prettier"
+  ],
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "no-duplicate-imports": "error",
+    "no-undef": "error",
+    "no-unused-vars": "error",
+    "no-else-return": "error",
+    "flowtype/define-flow-type": 1,
+    "flowtype/use-flow-type": 1,
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "bracketSpacing": true,
+        "tabWidth": 2,
+        "printWidth": 100
+      }
+    ]
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
+  }
+}

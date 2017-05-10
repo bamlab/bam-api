@@ -15,6 +15,6 @@ module.exports = {
      */
     currentlyBorrowedBy(book: BookDBType, _: {}, ctx: ContextType) {
       return BammerLoader.load(ctx, book.bammerBorrowingId);
-    }
-  }
+    },
+  },
 };

@@ -12,7 +12,7 @@ class Book {
   id: $PropertyType<BookDBType, 'id'>;
   name: $PropertyType<BookDBType, 'name'>;
   author: $PropertyType<BookDBType, 'author'>;
-  constructor(data: BookDBType, viewer: {}) {
+  constructor(data: BookDBType) {
     this.id = data.id;
     this.name = data.name;
     this.author = data.author;
@@ -35,7 +35,7 @@ class Book {
     return {
       byId,
       byBorrowingUserId,
-      primeLoaders
+      primeLoaders,
     };
   }
   static async load({ user: viewer, dataloaders }, id): Promise<?Book> {

@@ -4,12 +4,7 @@
  * @flow
  */
 
-const {
-  makeExecutableSchema,
-  addResolveFunctionsToSchema,
-  addMockFunctionsToSchema,
-  attachConnectorsToContext
-} = require('graphql-tools');
+const { makeExecutableSchema } = require('graphql-tools');
 
 // import the types from the type directory
 const typeDefs = require('./typeDefs');

@@ -16,14 +16,14 @@ module.exports = {
       lastName,
       firstName,
       name: [firstName, lastName].join(' '),
-      booksCurrentlyBorrowed: () => new MockList([0, 5])
+      booksCurrentlyBorrowed: () => new MockList([0, 5]),
     };
   },
   Book: () => ({
     name: () => casual.title,
-    author: () => casual.name
+    author: () => casual.name,
   }),
   Query: () => ({
-    allBammers: () => new MockList([1, 15])
-  })
+    allBammers: () => new MockList([1, 15]),
+  }),
 };
