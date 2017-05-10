@@ -1,0 +1,6 @@
+/* .gqlconfig */
+{
+  schema: {
+    files: '**/*.gql'
+  }
+}

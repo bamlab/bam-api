@@ -35,6 +35,7 @@
     "validate-commit-msg": "^2.12.1"
   },
   "devDependencies": {
+    "@playlyfe/gql": "^2.2.4",
     "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",
     "eslint-plugin-flowtype": "^2.32.1",
