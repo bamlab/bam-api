@@ -6,7 +6,9 @@
   "author": "Tycho Tatitscheff",
   "license": "MIT",
   "scripts": {
-    "start": "knex migrate:latest && node index.js",
+    "start": "yarn db:migrate && node index.js",
+    "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run",
     "commitmsg": "validate-commit-msg",
     "test:lint": "yarn eslint ."
   },
