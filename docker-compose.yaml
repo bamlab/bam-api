@@ -52,9 +52,11 @@ services:
       - NODE_ENV=staging
       - VIRTUAL_HOST=bam-api.cloud.bam.tech
       - VIRTUAL_NETWORK=nginx-proxy
-      - VIRTUAL_PORT=80
+      - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=bam-api.cloud.bam.tech
       - LETSENCRYPT_EMAIL=tychot@bam.tech
+    ports:
+      - "3000"
     depends_on:
       - db
     networks:

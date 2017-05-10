@@ -85,6 +85,12 @@ router.post(
     };
   })
 );
+
+// redirect to graphiql
+router.get('/', ctx => {
+  return ctx.redirect('/graphiql');
+});
+
 // create the /graphiql endpoint and connect it to the /graphql
 router.get('/graphiql', ctx => {
   return ctx.render('graphiql', {});
