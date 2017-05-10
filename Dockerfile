@@ -10,4 +10,4 @@ WORKDIR /srv
 COPY . /srv
 RUN yarn install
 
-CMD dockerize -wait tcp://db:5432 -timeout 10s && yarn start
+CMD dockerize -wait tcp://postgres:5432 -timeout 10s && yarn start
