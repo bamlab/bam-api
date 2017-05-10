@@ -1,6 +1,6 @@
 Database:
   client: 'pg'
-  connection: postgresql://tql:itstqldude@db/tql
+  connection: postgresql://tql:itstqldude@postgres/tql
   seeds:
     directory: './db/seeds/development'
   debug: false
