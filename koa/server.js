@@ -59,7 +59,7 @@ const jwtConfig = Object.assign(
 app.use(koaJwt(jwtConfig));
 
 // import the schema and mount it under /graphql
-const schema = require('../api/schema');
+const schema = require('../presentation/schema');
 const queryBuilders = require('../db/queryBuilders');
 
 // get the dataloader for each request
