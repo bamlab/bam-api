@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Tycho Tatitscheff",
   "license": "MIT",
+  "scripts": {
+    "start": "knex migrate:latest && node index.js",
+    "commitmsg": "validate-commit-msg"
+  },
   "dependencies": {
     "@tychot/jwks-rsa": "1.1.2",
     "casual": "^1.5.12",
@@ -15,6 +19,7 @@
     "graphql": "^0.9.5",
     "graphql-server-koa": "^0.7.2",
     "graphql-tools": "^0.11.0",
+    "husky": "^0.13.3",
     "js-yaml": "^3.8.3",
     "knex": "^0.13.0",
     "koa": "^2.2.0",
@@ -25,9 +30,7 @@
     "koa-views": "^6.0.2",
     "pg": "^6.1.5",
     "sqlite3": "^3.1.8",
-    "uuid": "^3.0.1"
-  },
-  "scripts": {
-    "start": "knex migrate:latest && node index.js"
+    "uuid": "^3.0.1",
+    "validate-commit-msg": "^2.12.1"
   }
 }
