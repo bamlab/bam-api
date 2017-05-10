@@ -5,6 +5,7 @@
  */
 
 const BookLoader = require('../../business/book');
+const BammerLoader = require('../../business/bammer');
 
 module.exports = {
   Bammer: {
@@ -17,6 +18,14 @@ module.exports = {
      */
     booksCurrentlyBorrowed(bammer: BammerDBType, _: {}, ctx: ContextType) {
       return BookLoader.loadByBorrowing(ctx, bammer.id);
+    },
+  },
+  Query: {
+    allBammers(root: {}, _: {}, ctx: ContextType) {
+      return BammerLoader.loadAll(ctx);
+    },
+    bammer(root: {}, args: { id: string }, ctx: ContextType) {
+      return BammerLoader.load(ctx, args.id);
     },
   },
 };

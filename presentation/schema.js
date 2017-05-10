@@ -3,14 +3,67 @@
  *
  * @flow
  */
-
+const glob = require('glob');
+const fs = require('fs');
+const path = require('path');
 const { makeExecutableSchema } = require('graphql-tools');
+const deepAssign = require('deep-assign');
 
-// import the types from the type directory
-const typeDefs = require('./typeDefs');
+const queryRegex = /type Query {\n([\s\S]*?)\n}/m;
+const mutationRegex = /type Mutation {\n([\s\S]*?)\n}/m;
+
+const typeDefs = [];
+const queries = [];
+const mutations = [];
+let resolvers = {};
+
+// loop over types and import the contents
+glob.sync('**/*.type.gql', { cwd: __dirname }).forEach(filename => {
+  const filePath = path.join(__dirname, filename);
+  const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' });
+  typeDefs.push(fileContent);
+});
+
+// loop over schemas and import the contents
+glob.sync('**/*.schema.gql', { cwd: __dirname }).forEach(filename => {
+  const filePath = path.join(__dirname, filename);
+  const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' });
+  const queriesResults = fileContent.match(queryRegex);
+  const mutationsResults = fileContent.match(mutationRegex);
+  if (queriesResults && queriesResults[1]) {
+    queries.push(queriesResults[1]);
+  }
+  if (mutationsResults && mutationsResults[1]) {
+    mutations.push(mutationsResults[1]);
+  }
+});
+
+// Loop over resolvers and import the contents
+glob.sync('**/*.resolvers.js', { cwd: __dirname }).forEach(filename => {
+  const filePath = path.join(__dirname, filename);
+  // $FlowFixMe
+  const resolversResults = require(filePath);
+  resolvers = deepAssign(resolvers, resolversResults);
+});
+
+// Create schema types
+let root = `
+  type Query {
+  ${queries.join('\n')}
+  }
+`;
+
+if (mutations.length) {
+  root += `
+    type Mutation {
+    ${mutations.join('\n')}
+    }
+  `;
+}
+
+typeDefs.push(root);
 
 // create a schema
-const resolvers = require('./resolvers');
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 // add mocks to the schema, preserving the existing resolvers (none for the time beeing)
