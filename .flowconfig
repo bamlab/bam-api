@@ -4,7 +4,7 @@
 
 [libs]
 db/flow
-flow/global
+koa/flow
 
 [options]
 
