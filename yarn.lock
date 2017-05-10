@@ -560,6 +560,10 @@ flagged-respawn@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/flagged-respawn/-/flagged-respawn-0.3.2.tgz#ff191eddcd7088a675b2610fffc976be9b8074b5"
 
+flow-bin@^0.46.0:
+  version "0.46.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.46.0.tgz#06ad7fe19dddb1042264438064a2a32fee12b872"
+
 flow-remove-types@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/flow-remove-types/-/flow-remove-types-1.2.1.tgz#58e261bf8b842bd234c86cafb982a1213aff0edb"
