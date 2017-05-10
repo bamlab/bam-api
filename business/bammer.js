@@ -15,6 +15,7 @@ class Bammer {
   role: $PropertyType<BammerDBType, 'role'>;
   name: $PropertyType<BammerDBType, 'name'>;
   email: $PropertyType<BammerDBType, 'email'>;
+
   constructor(data: BammerDBType, viewer: { id?: string }) {
     this.id = data.id;
     this.firstName = data.firstName;
@@ -22,12 +23,17 @@ class Bammer {
     this.role = data.role;
 
     // handle the deprecated properties here
-    this.name = [data.firstName, data.lastName].join(' ');
 
     if (viewer.id === data.id) {
       this.email = data.email;
     }
   }
+
+  /** @deprecated */
+  get name(): string {
+    return [this.firstName, this.lastName].join(' ');
+  }
+
   // get the loaders for the request, in order to batch and cach the db calls
   static getLoaders(): { byId: *, primeLoaders: * } {
     const primeLoaders = (bammers: Array<Bammer>) => {
