@@ -3,6 +3,6 @@ declare type BookDBType = {
   id: string,
   name: string,
   author: string,
-  bammerBorrowingId: string,
+  bamerBorrowingId: string,
   currentlyBorrowedBy: ?string,
 };

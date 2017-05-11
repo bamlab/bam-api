@@ -17,13 +17,13 @@ class BookModel {
     return await db.first().table('Book').where('id', id);
   }
   /**
-   * Get Books that one bammer is currently borrowing
+   * Get Books that one bamer is currently borrowing
    * 
    * @static
    * @memberOf BookModel
    */
   static async getByBorrowerId(id: string): Promise<Array<BookType>> {
-    return await db.select().table('Book').where('bammerBorrowingId', id);
+    return await db.select().table('Book').where('bamerBorrowingId', id);
   }
   /**
    * Get every books
@@ -35,12 +35,12 @@ class BookModel {
     return await db.select().table('Book');
   }
   /**
-   * Get the corresponding list of bammer of a given list of uuid
+   * Get the corresponding list of bamer of a given list of uuid
    *
    * Used for batching in dataloader
    * 
    * @static
-   * @memberOf BammerModel
+   * @memberOf BamerModel
    */
   static async getByListofIds(ids: Array<string>): Promise<Array<BookType | Error>> {
     return await db.select().table('Book').whereIn('id', ids);

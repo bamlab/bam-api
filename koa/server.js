@@ -69,16 +69,16 @@ router.post(
   graphqlKoa(async ({ state }) => {
     let user;
     const email = state.user && state.user.email;
-    const isBammer = /^\w+@bam\.tech$/.test(email);
-    if (email && isBammer) {
-      user = await queryBuilders.bammer.getByEmail(email);
+    const isBamer = /^\w+@bam\.tech$/.test(email);
+    if (email && isBamer) {
+      user = await queryBuilders.bamer.getByEmail(email);
     }
     // build the data loader map, using reduce
     const dataloaders = Object.keys(business).reduce((dataloaders, loaderKey) => {
       return Object.assign({}, dataloaders, { [loaderKey]: business[loaderKey].getLoaders() });
     }, {});
     // create a context for each request
-    const context = Object.assign({}, { dataloaders, user, isBammer });
+    const context = Object.assign({}, { dataloaders, user, isBamer });
     return {
       schema,
       context,

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-declare type BammerDBType = {
+declare type BamerDBType = {
   id: string,
   role: 'DEV' | 'SALE' | 'GROWTH' | 'ADMIN',
   name: string,

@@ -9,7 +9,7 @@ const { MockList } = require('graphql-tools');
 
 module.exports = {
   String: () => casual.word,
-  Bammer: () => {
+  Bamer: () => {
     const lastName = casual.last_name;
     const firstName = casual.first_name;
     return {
@@ -24,6 +24,6 @@ module.exports = {
     author: () => casual.name,
   }),
   Query: () => ({
-    allBammers: () => new MockList([1, 15]),
+    allBamers: () => new MockList([1, 15]),
   }),
 };
