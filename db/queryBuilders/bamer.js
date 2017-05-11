@@ -13,7 +13,7 @@ class BamerModel {
    * @static
    * @memberOf BamerModel
    */
-  static async getById(id: string): Promise<BamerType> {
+  static async getById(id: string): Promise<BamerDBType> {
     return await db.first().table('Bamer').where('id', id);
   }
   /**
@@ -24,7 +24,7 @@ class BamerModel {
    * @static
    * @memberOf BamerModel
    */
-  static async getByEmail(email: string): Promise<BamerType> {
+  static async getByEmail(email: string): Promise<BamerDBType> {
     return await db.first().table('Bamer').where('email', email);
   }
   /**
@@ -33,7 +33,7 @@ class BamerModel {
    * @static
    * @memberOf BamerModel
    */
-  static async getAll(): Promise<Array<BamerType>> {
+  static async getAll(): Promise<Array<BamerDBType>> {
     return await db.select().table('Bamer');
   }
   /**
@@ -44,7 +44,7 @@ class BamerModel {
    * @static
    * @memberOf BamerModel
    */
-  static async getByListofIds(ids: Array<string>): Promise<Array<BamerType | Error>> {
+  static async getByListofIds(ids: Array<string>): Promise<Array<BamerDBType | Error>> {
     return await db.select().table('Bamer').whereIn('id', ids);
   }
 }
