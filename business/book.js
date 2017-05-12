@@ -22,7 +22,7 @@ class Book {
   static getLoaders() {
     const primeLoaders = (books: Array<BookDBType>) => {
       for (let book of books) {
-        book.bammerBorrowingId && byBorrowingUserId.prime(book.bammerBorrowingId, book);
+        book.bamerBorrowingId && byBorrowingUserId.prime(book.bamerBorrowingId, book);
         byId.prime(book.id, book);
       }
     };

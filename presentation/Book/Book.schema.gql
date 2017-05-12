@@ -1,4 +1,4 @@
-type Query {
+type PartialQueryBook {
   # a book, by id
   book(id: ID!): Book
   # all the book

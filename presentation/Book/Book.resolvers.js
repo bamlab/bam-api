@@ -4,18 +4,18 @@
  * @flow
  */
 
-const BammerLoader = require('../../business/bammer');
+const BamerLoader = require('../../business/bamer');
 const BookLoader = require('../../business/book');
 
 module.exports = {
   Book: {
     /**
-     * Resolve the connection of the bammer currently borrowing one book
+     * Resolve the connection of the bamer currently borrowing one book
      * 
      * @returns 
      */
     currentlyBorrowedBy(book: BookDBType, _: {}, ctx: ContextType) {
-      return BammerLoader.load(ctx, book.bammerBorrowingId);
+      return BamerLoader.load(ctx, book.bamerBorrowingId);
     },
   },
   Query: {

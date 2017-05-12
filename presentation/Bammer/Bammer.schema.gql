@@ -1,6 +1,0 @@
-type Query {
-  # a bammer, by id
-  bammer(id: ID!): Bammer
-  # all the bammer
-  allBammers: [Bammer]
-}

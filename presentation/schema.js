@@ -9,8 +9,8 @@ const path = require('path');
 const { makeExecutableSchema } = require('graphql-tools');
 const deepAssign = require('deep-assign');
 
-const queryRegex = /type Query {\n([\s\S]*?)\n}/m;
-const mutationRegex = /type Mutation {\n([\s\S]*?)\n}/m;
+const queryRegex = /type PartialQuery\w+ {\n([\s\S]*?)\n}/m;
+const mutationRegex = /type PartialMutation\w+ {\n([\s\S]*?)\n}/m;
 
 const typeDefs = [];
 const queries = [];

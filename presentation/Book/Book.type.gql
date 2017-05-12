@@ -6,6 +6,6 @@ type Book {
   name: String!
   # the book author
   author: String
-  # the bammer that may have borrowed the book
-  currentlyBorrowedBy: Bammer
+  # the bamer that may have borrowed the book
+  currentlyBorrowedBy: Bamer
 }

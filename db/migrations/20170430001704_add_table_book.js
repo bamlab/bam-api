@@ -3,7 +3,7 @@ exports.up = function(knex) {
     table.uuid('id').primary();
     table.string('name');
     table.string('author');
-    table.uuid('bammerBorrowingId').references('id').inTable('Bammer');
+    table.uuid('bamerBorrowingId').references('id').inTable('Bamer');
     table.timestamps();
   });
 };

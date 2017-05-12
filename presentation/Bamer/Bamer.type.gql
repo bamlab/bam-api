@@ -1,4 +1,4 @@
-enum BAMMER_ROLE {
+enum BAMER_ROLE {
   # A developer
   DEV
   # A sale
@@ -9,19 +9,19 @@ enum BAMMER_ROLE {
   ADMIN
 }
 
-# represent a bammer
-type Bammer {
+# represent a bamer
+type Bamer {
   id: ID!
-  # the bammer role
-  role: BAMMER_ROLE
-  # the bammer full name
+  # the bamer role
+  role: BAMER_ROLE
+  # the bamer full name
   name: String @deprecated(reason: "Use firstName and lastName instead")
-  # the bammer firstName
+  # the bamer firstName
   firstName: String
-  # the bammer lastName
+  # the bamer lastName
   lastName: String
-  # the bammer email
+  # the bamer email
   email: String
-  # the books currently borrowed by the bammer
+  # the books currently borrowed by the bamer
   booksCurrentlyBorrowed: [Book]
 }
