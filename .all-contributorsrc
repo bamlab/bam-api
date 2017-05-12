@@ -1,0 +1,37 @@
+{
+  "projectName": "bam-api",
+  "projectOwner": "bamlab",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 150,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "tychota",
+      "name": "TychoTa",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13785185?v=3",
+      "profile": "https://twitter.com/TychoTa",
+      "contributions": [
+        "question",
+        "code",
+        "doc",
+        "infra",
+        "tool"
+      ]
+    },
+    {
+      "login": "yleflour",
+      "name": "Yann Leflour",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1863461?v=3",
+      "profile": "http://bamlab.fr/",
+      "contributions": [
+        "bug",
+        "code",
+        "example",
+        "plugin",
+        "review"
+      ]
+    }
+  ]
+}
