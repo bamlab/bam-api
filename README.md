@@ -25,6 +25,50 @@ Non goals of this repo are:
 
 ## Repository stucture
 
+We organized the sever using the following layer
+
+![Layers](docs/images/layers.png)
+
+### Database
+
+All the file related are either:
+- the `knexfile.js` at the root of the directory, used for knex command line
+- in the `db` folder
+
+The database layer are the `db/migrations/*.js` and `db/seed/*.js` files. Migrations are common for traditional RDBMs. I personnaly think they offer a extra security by providinf incremental, reversible and documented changes.
+
+We use the http://knexjs.org/ query builder to write and execute the mutations.
+
+###  Query Builders
+
+We then have Query Builders in the `db/queryBuilders` directory.
+
+Query builders provide a domain driven abstrction to raw sql calls.
+
+Considering the following example:
+
+```js
+class UserQueryBuilder {
+  async createOrUpdateNameByID(id: string, name: string): UserType {
+    const result = await knex.table('users').first('id', 'name').where('id', id);
+    if (result) {
+      return await knex.table('users').update('name', name).where('id', id).returning('id', 'name');
+    }
+    return await knex.table('users').insert({name}).returning('id', 'name');
+  }
+}
+```
+
+In the rest of the code we will use `UserQueryBuilder.createOrUpdateNameByID('long-uuid', 'Tom')`, which is a nice abstraction.
+
+That being said we still have a great granularity about the real SQL query send, and we are able to use feature specifics like `returning` in our case, or index.
+
+### Business logic
+
+> @todo
+
+### Presentation
+
 > @todo
 
 ## Contributors
