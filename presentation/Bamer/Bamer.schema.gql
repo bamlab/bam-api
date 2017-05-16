@@ -1,6 +1,0 @@
-type PartialQueryBammer {
-  # a bamer, by id
-  bamer(id: ID!): Bamer
-  # all the bamer
-  allBamers: [Bamer]
-}

@@ -1,0 +1,10 @@
+type Query {
+  # a bamer, by id
+  bamer(id: ID!): Bamer
+  # all the bamer
+  allBamers: [Bamer]
+  # a book, by id
+  book(id: ID!): Book
+  # all the book
+  allBooks: [Book]
+}
