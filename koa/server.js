@@ -60,25 +60,21 @@ app.use(koaJwt(jwtConfig));
 
 // import the schema and mount it under /graphql
 const schema = require('../presentation/schema');
-const queryBuilders = require('../db/queryBuilders');
+const getViewerAndRoles = require('../business/utils/auth');
 
 // get the dataloader for each request
 const business = require('../business');
 router.post(
   '/graphql',
   graphqlKoa(async ({ state }) => {
-    let user;
-    const email = state.user && state.user.email;
-    const isBamer = /^\w+@bam\.tech$/.test(email);
-    if (email && isBamer) {
-      user = await queryBuilders.bamer.getByEmail(email);
-    }
+    const { user, roles } = await getViewerAndRoles(state.user);
+    console.log(user, roles);
     // build the data loader map, using reduce
     const dataloaders = Object.keys(business).reduce((dataloaders, loaderKey) => {
       return Object.assign({}, dataloaders, { [loaderKey]: business[loaderKey].getLoaders() });
     }, {});
     // create a context for each request
-    const context = Object.assign({}, { dataloaders, user, isBamer });
+    const context = Object.assign({}, { dataloaders, user, roles });
     return {
       schema,
       context,
