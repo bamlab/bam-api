@@ -55,7 +55,7 @@ class BamerModel {
    * @static
    * @memberOf BamerModel
    */
-  static async createAndReturn({ firstName, lastName, email, role }): Promise<BamerDBType> {
+  static async createAndReturn({ firstName, lastName, email, role }): Promise<?BamerDBType> {
     const [id] = await db
       .table('Bamer')
       .returning('id')

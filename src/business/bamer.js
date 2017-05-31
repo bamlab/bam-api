@@ -41,7 +41,6 @@ class Bamer {
         byId.prime(bamer.id, bamer);
       }
     };
-    // $FlowFixMe bug with commonjs version, shoudl be fixed if we go to ES6
     const byId = new DataLoader(ids => BamerModel.getByListofIds(ids));
     return {
       byId,

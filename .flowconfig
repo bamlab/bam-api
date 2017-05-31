@@ -4,8 +4,8 @@
 [include]
 
 [libs]
-db/flow
-koa/flow
+src/db/flow
+src/koa/flow
 
 [options]
 unsafe.enable_getters_and_setters=true

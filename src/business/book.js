@@ -22,19 +22,17 @@ class Book {
   static getLoaders() {
     const primeLoaders = (books: Array<BookDBType>) => {
       for (let book of books) {
-        book.bamerBorrowingId && byBorrowingUserId.prime(book.bamerBorrowingId, book);
+        //book.bamerBorrowingId && byBorrowingUserId.prime(book.bamerBorrowingId, book);
         byId.prime(book.id, book);
       }
     };
-    // $FlowFixMe
     const byId = new DataLoader(ids => BookModel.getByListofIds(ids));
     // Fix me : this loader does not work
     // DataLoader must be constructed with a function which accepts Array<key> and returns Promise<Array<value>>, but the function did not return a Promise of an Array of the same length as the Array of keys.
-    // $FlowFixMe
-    const byBorrowingUserId = new DataLoader(ids => BookModel.getByBorrowerId(ids));
+    // const byBorrowingUserId = new DataLoader(ids => BookModel.getByBorrowerId(ids));
     return {
       byId,
-      byBorrowingUserId,
+      //byBorrowingUserId,
       primeLoaders,
     };
   }

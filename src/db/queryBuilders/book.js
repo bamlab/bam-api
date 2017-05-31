@@ -42,7 +42,7 @@ class BookModel {
    * @static
    * @memberOf BamerModel
    */
-  static async getByListofIds(ids: Array<string>): Promise<Array<BookDBType | Error>> {
+  static async getByListofIds(ids: Array<string>): Promise<Array<?BookDBType | Error>> {
     return await db.select().table('Book').whereIn('id', ids);
   }
 }
