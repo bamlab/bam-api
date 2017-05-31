@@ -1,0 +1,16 @@
+# the structure of the imput required by 
+# - `registerMyself` mutation
+input BamerInput {
+  # the bamer role
+  role: BAMER_ROLE!
+  # the bamer first name
+  firstName: String!
+  # the bamer lastname name
+  lastName: String!
+  # the bamer email, validates by JWT and bam patterns
+  email: String!
+}
+
+type Mutation {
+  registerMyself(bamer: BamerInput): Bamer
+}

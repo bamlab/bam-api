@@ -47,6 +47,21 @@ class BamerModel {
   static async getByListofIds(ids: Array<string>): Promise<Array<BamerDBType | Error>> {
     return await db.select().table('Bamer').whereIn('id', ids);
   }
+  /**
+   * Create a new bammer
+   *
+   * Used for batching in dataloader
+   * 
+   * @static
+   * @memberOf BamerModel
+   */
+  static async createAndReturn({ firstName, lastName, email, role }): Promise<BamerDBType> {
+    const [id] = await db
+      .table('Bamer')
+      .returning('id')
+      .insert({ firstName, lastName, email, role });
+    return await this.getById(id);
+  }
 }
 
 module.exports = BamerModel;
