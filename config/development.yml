@@ -1,10 +1,8 @@
 Database:
-  client: 'sqlite3'
-  connection:
-    filename: './db/dev.sqlite'
+  client: 'pg'
+  connection: postgresql://postgres@127.0.0.1/tql
   seeds:
     directory: './db/seeds/development'
-  useNullAsDefault: true
   debug: false
 Security:
   jwks:
