@@ -1,5 +1,5 @@
 Database:
   migrations:
-    directory: './db/migrations'
+    directory: './src/db/migrations'
 Server:
   port: 3000

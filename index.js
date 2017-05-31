@@ -5,4 +5,4 @@
  */
 
 require('flow-remove-types/register');
-require('./koa/server');
+require('./src/koa/server');
