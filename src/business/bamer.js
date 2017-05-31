@@ -5,8 +5,8 @@
  *
  * @flow
  */
-const DataLoader = require('dataloader');
-const BamerModel = require('../db/queryBuilders/bamer');
+import DataLoader from 'dataloader';
+import BamerModel from '../db/queryBuilders/bamer';
 
 class Bamer {
   id: $PropertyType<BamerDBType, 'id'>;

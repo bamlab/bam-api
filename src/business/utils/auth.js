@@ -1,7 +1,7 @@
 // @flow
-const queryBuilders = require('../../db/queryBuilders');
+import queryBuilders from '../../db/queryBuilders';
 
-module.exports = async function getViewerAndRoles(
+export default async function getViewerAndRoles(
   requestUser: any
 ): Promise<{| user: ?BamerDBType, roles: Array<string> |}> {
   // if there is no user (ie req.state.user is falsy), return no user and anonymous role
@@ -22,9 +22,9 @@ module.exports = async function getViewerAndRoles(
     user,
     roles: getRolesByEmail(user.email),
   };
-};
+}
 
-function getRolesByEmail(email: string): Array<string> {
+export function getRolesByEmail(email: string): Array<string> {
   let roles = [];
   if (/^\w+@bam\.tech$/.test(email)) {
     roles.push('BAMER');

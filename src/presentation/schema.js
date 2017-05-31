@@ -3,14 +3,12 @@
  *
  * @flow
  */
-const glob = require('glob');
-const fs = require('fs');
-const path = require('path');
-const { makeExecutableSchema } = require('graphql-tools');
-const deepAssign = require('deep-assign');
+import glob from 'glob';
+import fs from 'fs';
+import path from 'path';
+import { makeExecutableSchema } from 'graphql-tools';
 
 const typeDefs = [];
-let resolvers = {};
 
 // loop over types and import the contents
 glob.sync('**/*.type.gql', { cwd: __dirname }).forEach(filename => {
@@ -19,19 +17,13 @@ glob.sync('**/*.type.gql', { cwd: __dirname }).forEach(filename => {
   typeDefs.push(fileContent);
 });
 
-// Loop over resolvers and import the contents
-glob.sync('**/*.resolvers.js', { cwd: __dirname }).forEach(filename => {
-  const filePath = path.join(__dirname, filename);
-  // $FlowFixMe
-  const resolversResults = require(filePath);
-  resolvers = deepAssign(resolvers, resolversResults);
-});
+import resolvers from './resolvers';
 
 // create a schema
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 // add mocks to the schema, preserving the existing resolvers (none for the time beeing)
-// const mocks = require('./mocks');
+// import mocks from './mocks';
 // addMockFunctionsToSchema({ schema, mocks, preserveResolvers: true });
 
 module.exports = schema;

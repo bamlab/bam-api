@@ -4,5 +4,5 @@
  * @flow
  */
 
-const config = require('config');
+import config from 'config';
 module.exports = require('knex')(config.get('Database'));

@@ -4,8 +4,8 @@
  * @flow
  */
 
-const casual = require('casual');
-const { MockList } = require('graphql-tools');
+import casual from 'casual';
+import { MockList } from 'graphql-tools';
 
 module.exports = {
   String: () => casual.word,

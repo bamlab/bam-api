@@ -4,7 +4,7 @@
  * @flow
  */
 
-const BamerLoader = require('../../business/bamer');
+import BamerLoader from '../../business/bamer';
 
 module.exports = {
   Mutation: {

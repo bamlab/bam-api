@@ -4,8 +4,8 @@
  * @flow
  */
 
-const BamerLoader = require('../../business/bamer');
-const BookLoader = require('../../business/book');
+import BamerLoader from '../../business/bamer';
+import BookLoader from '../../business/book';
 
 module.exports = {
   Query: {

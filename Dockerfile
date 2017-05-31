@@ -8,6 +8,6 @@ RUN apk add --no-cache --virtual .build-deps curl \
 
 WORKDIR /srv
 COPY . /srv
-RUN yarn install
+RUN yarn install && yarn build && rm -rf /srv/src
 
 CMD dockerize -wait tcp://postgres:5432 -timeout 10s && yarn start

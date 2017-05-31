@@ -7,24 +7,24 @@
  */
 
 // Import koa 2, the modern express
-const koa = require('koa');
+import koa from 'koa';
 // Import koa 2router, so we can mount graphQl under the /graphql endpoint
-const koaRouter = require('koa-router');
+import koaRouter from 'koa-router';
 // Import koa 2 bodyparser, to parse the html bodycontaining the query
 // and pass the decoded string to graphql
-const koaBody = require('koa-bodyparser');
+import koaBody from 'koa-bodyparser';
 // Import helmet middleware to add extra security for free
-const helmet = require('koa-helmet');
+import helmet from 'koa-helmet';
 // Use config to externalize the configuration
-const config = require('config');
+import config from 'config';
 // import graphqlKoa and graphiql
-const { graphqlKoa } = require('graphql-server-koa');
+import { graphqlKoa } from 'graphql-server-koa';
 // import jwt-verification
-const koaJwt = require('koa-jwt');
+import koaJwt from 'koa-jwt';
 // and jwks to delegate the auth to auth0
 const jwksRsa = require('@tychot/jwks-rsa');
 // import view to render the static login page
-const koaViews = require('koa-views');
+import koaViews from 'koa-views';
 
 // create a new app
 const app = new koa();
@@ -38,7 +38,7 @@ app.use(helmet());
 app.use(koaBody());
 
 // use the ect template string for views
-const path = require('path');
+import path from 'path';
 app.use(
   koaViews(path.join(__dirname, 'views'), {
     map: {
@@ -48,33 +48,29 @@ app.use(
 );
 
 // configure jwt middleware to connect to auth0, check the token and
-const jwtConfig = Object.assign(
-  {},
-  {
-    secret: jwksRsa.koaJwtSecret(config.get('Security.jwks')),
-  },
-  config.get('Security.jwt'),
-  { passthrough: true }
-);
+const jwtConfig = {
+  secret: jwksRsa.koaJwtSecret(config.get('Security.jwks')),
+  ...config.get('Security.jwt'),
+  passthrough: true,
+};
 app.use(koaJwt(jwtConfig));
 
 // import the schema and mount it under /graphql
-const schema = require('../presentation/schema');
-const getViewerAndRoles = require('../business/utils/auth');
+import schema from '../presentation/schema';
+import getViewerAndRoles from '../business/utils/auth';
 
 // get the dataloader for each request
-const business = require('../business');
+import business from '../business';
 router.post(
   '/graphql',
   graphqlKoa(async ({ state }) => {
     const { user, roles } = await getViewerAndRoles(state.user);
-    console.log(user, roles);
     // build the data loader map, using reduce
     const dataloaders = Object.keys(business).reduce((dataloaders, loaderKey) => {
-      return Object.assign({}, dataloaders, { [loaderKey]: business[loaderKey].getLoaders() });
+      return { ...dataloaders, [loaderKey]: business[loaderKey].getLoaders() };
     }, {});
     // create a context for each request
-    const context = Object.assign({}, { dataloaders, user, roles });
+    const context = { dataloaders, user, roles };
     return {
       schema,
       context,

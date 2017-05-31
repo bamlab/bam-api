@@ -4,7 +4,7 @@
  * @flow
  */
 
-const db = require('..');
+import db from '..';
 
 class BamerModel {
   /**

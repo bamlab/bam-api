@@ -5,8 +5,8 @@
  *
  * @flow
  */
-const DataLoader = require('dataloader');
-const BookModel = require('../db/queryBuilders/book');
+import DataLoader from 'dataloader';
+import BookModel from '../db/queryBuilders/book';
 
 class Book {
   id: $PropertyType<BookDBType, 'id'>;
