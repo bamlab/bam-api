@@ -1,4 +1,4 @@
-FROM node:7.10-alpine
+FROM node:8.0-alpine
 
 ENV DOCKERIZE_VERSION v0.4.0
 RUN apk add --no-cache --virtual .build-deps curl \
