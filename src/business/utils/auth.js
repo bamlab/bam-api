@@ -1,5 +1,5 @@
 // @flow
-import queryBuilders from '../../db/queryBuilders';
+import * as queryBuilders from '../../db/queryBuilders';
 
 export default async function getViewerAndRoles(
   requestUser: any

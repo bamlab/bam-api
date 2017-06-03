@@ -22,7 +22,7 @@ import { graphqlKoa } from 'graphql-server-koa';
 // import jwt-verification
 import koaJwt from 'koa-jwt';
 // and jwks to delegate the auth to auth0
-const jwksRsa = require('@tychot/jwks-rsa');
+import jwksRsa from '@tychot/jwks-rsa';
 // import view to render the static login page
 import koaViews from 'koa-views';
 
@@ -60,7 +60,7 @@ import schema from '../presentation/schema';
 import getViewerAndRoles from '../business/utils/auth';
 
 // get the dataloader for each request
-import business from '../business';
+import * as business from '../business';
 router.post(
   '/graphql',
   graphqlKoa(async ({ state }) => {

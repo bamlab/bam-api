@@ -1,4 +1,4 @@
-module.exports = {
-  bamer: require('./bamer'),
-  book: require('./book'),
-};
+// @flow
+
+export { default as bamer } from './bamer';
+export { default as book } from './book';

@@ -1,7 +1,10 @@
 node_modules
 *.sqlite
 
+docker/certs
+docker/conf.d
 docker/proxy
 docker/database
+docker/vhost.d
 
 build

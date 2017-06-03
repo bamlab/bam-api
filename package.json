@@ -50,6 +50,7 @@
     "ect": "^0.5.9",
     "flow-remove-types": "^1.2.0",
     "glob": "^7.1.1",
+    "graphql": "0.9.6",
     "graphql-server-koa": "^0.8.0",
     "graphql-tools": "^1.0.0",
     "husky": "^0.13.3",

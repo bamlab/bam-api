@@ -5,4 +5,5 @@
  */
 
 import config from 'config';
-module.exports = require('knex')(config.get('Database'));
+import knex from 'knex';
+export default knex(config.get('Database'));

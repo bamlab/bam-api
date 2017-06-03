@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const DataLoader = require('dataloader').default;
+import DataLoader from 'dataloader';
 
 declare type ContextType = {
   dataloaders: {

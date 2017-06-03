@@ -6,7 +6,7 @@
 
 import BookLoader from '../../business/book';
 
-module.exports = {
+export default {
   Bamer: {
     /**
      * Resolve the connection of the books currently borrowed by one bamer

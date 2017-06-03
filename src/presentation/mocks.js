@@ -7,7 +7,7 @@
 import casual from 'casual';
 import { MockList } from 'graphql-tools';
 
-module.exports = {
+export default {
   String: () => casual.word,
   Bamer: () => {
     const lastName = casual.last_name;

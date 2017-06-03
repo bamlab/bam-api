@@ -7,7 +7,7 @@
 import BamerLoader from '../../business/bamer';
 import BookLoader from '../../business/book';
 
-module.exports = {
+export default {
   Query: {
     allBamers(root: {}, _: {}, ctx: ContextType) {
       return BamerLoader.loadAll(ctx);

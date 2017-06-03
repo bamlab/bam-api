@@ -64,4 +64,4 @@ class BamerModel {
   }
 }
 
-module.exports = BamerModel;
+export default BamerModel;

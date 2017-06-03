@@ -6,7 +6,7 @@
 
 import BamerLoader from '../../business/bamer';
 
-module.exports = {
+export default {
   Mutation: {
     /**
      * Resolve the connection of the bamer currently borrowing one book

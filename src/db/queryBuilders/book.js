@@ -47,4 +47,4 @@ class BookModel {
   }
 }
 
-module.exports = BookModel;
+export default BookModel;

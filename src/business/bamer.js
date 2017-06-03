@@ -84,4 +84,4 @@ class Bamer {
   }
 }
 
-module.exports = Bamer;
+export default Bamer;

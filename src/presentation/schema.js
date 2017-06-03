@@ -26,4 +26,4 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 // import mocks from './mocks';
 // addMockFunctionsToSchema({ schema, mocks, preserveResolvers: true });
 
-module.exports = schema;
+export default schema;
