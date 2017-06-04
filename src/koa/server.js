@@ -25,6 +25,8 @@ import koaJwt from 'koa-jwt';
 import jwksRsa from '@tychot/jwks-rsa';
 // import view to render the static login page
 import koaViews from 'koa-views';
+// instrument graphql
+import OpticsAgent from 'optics-agent';
 
 // create a new app
 const app = new koa();
@@ -55,6 +57,8 @@ const jwtConfig = {
 };
 app.use(koaJwt(jwtConfig));
 
+app.use(OpticsAgent.koaMiddleware());
+
 // import the schema and mount it under /graphql
 import schema from '../presentation/schema';
 import getViewerAndRoles from '../business/utils/auth';
@@ -63,16 +67,19 @@ import getViewerAndRoles from '../business/utils/auth';
 import * as business from '../business';
 router.post(
   '/graphql',
-  graphqlKoa(async ({ state }) => {
-    const { user, roles } = await getViewerAndRoles(state.user);
+  graphqlKoa(async ctx => {
+    const { user, roles } = await getViewerAndRoles(ctx.state.user);
     // build the data loader map, using reduce
     const dataloaders = Object.keys(business).reduce((dataloaders, loaderKey) => {
       return { ...dataloaders, [loaderKey]: business[loaderKey].getLoaders() };
     }, {});
+    // create an optic context
+    const opticsContext = OpticsAgent.context(ctx.request);
     // create a context for each request
-    const context = { dataloaders, user, roles };
+    const context = { dataloaders, user, roles, opticsContext };
     return {
-      schema,
+      // instrument the schema
+      schema: OpticsAgent.instrumentSchema(schema),
       context,
     };
   })
