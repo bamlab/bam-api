@@ -9,7 +9,7 @@
       "request": "launch",
       "protocol": "inspector",
       "name": "Launch Program",
-      "program": "${workspaceRoot}/index.js",
+      "program": "${workspaceRoot}/build/main.js",
       "env": {
         "NODE_ENV": "development"
       }
