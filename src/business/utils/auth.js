@@ -31,3 +31,9 @@ export function getRolesByEmail(email: string): Array<string> {
   }
   return roles;
 }
+
+export function assertIsBamer(user: BamerDBType, roles: Array<string>) {
+  if (!roles.includes('BAMER')) {
+    throw new Error('Must be connected with a bam email address to use the service');
+  }
+}

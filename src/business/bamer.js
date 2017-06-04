@@ -7,6 +7,7 @@
  */
 import DataLoader from 'dataloader';
 import BamerModel from '../db/queryBuilders/bamer';
+import { assertIsBamer } from './utils/auth';
 
 class Bamer {
   id: $PropertyType<BamerDBType, 'id'>;
@@ -47,7 +48,8 @@ class Bamer {
       primeLoaders,
     };
   }
-  static async load({ user: viewer, dataloaders }, id): Promise<?Bamer> {
+  static async load({ user: viewer, dataloaders, roles }, id): Promise<?Bamer> {
+    assertIsBamer(viewer, roles);
     // return null if no id is given
     if (!id) return null;
     // return null if no id is given
@@ -56,17 +58,18 @@ class Bamer {
 
     return new Bamer(data, viewer);
   }
-  static async loadAll({ user: viewer, isBamer, dataloaders }): Promise<Array<Bamer>> {
-    if (!isBamer) throw new Error('Must be connected with a bam email address to use the service');
+  static async loadAll({ user: viewer, roles, dataloaders }): Promise<Array<Bamer>> {
+    assertIsBamer(viewer, roles);
 
     const data = await BamerModel.getAll();
     dataloaders.bamer.primeLoaders(data);
     return data.map(row => new Bamer(row, viewer));
   }
-  static async register({ user: viewer }, { firstName, lastName, role, email }): Promise<?Bamer> {
-    if (!viewer || !viewer.email) {
-      throw new Error('Must be connected with a bam email address to use the service');
-    }
+  static async register(
+    { user: viewer, roles },
+    { firstName, lastName, role, email }
+  ): Promise<?Bamer> {
+    assertIsBamer(viewer, roles);
     let data;
     try {
       data = await BamerModel.createAndReturn({ firstName, lastName, role, email });
