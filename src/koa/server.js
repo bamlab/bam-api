@@ -39,6 +39,22 @@ app.use(helmet());
 // use the body middlleware, to decode the body of the request
 app.use(koaBody());
 
+const bunyan = require('bunyan');
+const koaBunyanLogger = require('koa-bunyan-logger');
+let logger = bunyan.createLogger({
+  name: 'website',
+  stream: process.stdout,
+  level: 'debug',
+  serializers: bunyan.stdSerializers,
+});
+logger.req = logger.child({
+  component: 'req',
+  level: 'info',
+});
+app.use(koaBunyanLogger(logger.req));
+app.use(koaBunyanLogger.requestIdContext());
+app.use(koaBunyanLogger.requestLogger());
+
 // use the ect template string for views
 import path from 'path';
 app.use(

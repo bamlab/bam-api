@@ -2,7 +2,7 @@ Database:
   client: 'pg'
   connection: postgresql://postgres@127.0.0.1/tql
   seeds:
-    directory: './db/seeds/development'
+    directory: './src/db/seeds/development'
   debug: false
 Security:
   jwks:

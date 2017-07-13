@@ -4,7 +4,7 @@
  * @flow
  */
 
-import knex from 'knex';
+const knex = require('knex');
 
 exports.seed = function(knex: knex, Promise: typeof Promise) {
   // Deletes ALL existing entries
