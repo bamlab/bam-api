@@ -15,3 +15,5 @@ Security:
     issuer: 'https://tychot.eu.auth0.com/'
     debug: true
     algorithms: [ 'RS256' ]
+Logger:
+  verboseLevel: 1

@@ -3,3 +3,5 @@ Database:
     directory: './src/db/migrations'
 Server:
   port: 3000
+Logger:
+  verboseLevel: 1

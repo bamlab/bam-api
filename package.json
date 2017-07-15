@@ -5,7 +5,12 @@
   "description": "A GraphQL, 'production ready'™ api for internal use at bam, but open sourced as an example !",
   "main": "index.js",
   "homepage": "https://github.com/bamlab/bam-api",
-  "keywords": ["graphql", "knex", "postgres", "docker"],
+  "keywords": [
+    "graphql",
+    "knex",
+    "postgres",
+    "docker"
+  ],
   "bugs": {
     "url": "https://github.com/bamlab/bam-api/issues"
   },
@@ -38,7 +43,6 @@
   "dependencies": {
     "@tychot/jwks-rsa": "1.1.2",
     "backpack-core": "^0.4.0-rc1",
-    "bunyan": "^1.8.10",
     "casual": "^1.5.14",
     "config": "^1.25.1",
     "dataloader": "^1.3.0",
@@ -54,14 +58,17 @@
     "knex": "^0.13.0",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
-    "koa-bunyan-logger": "next",
     "koa-helmet": "^3.1.0",
     "koa-jwt": "^3.2.1",
+    "koa-pino-logger": "2",
+    "koa-requestid": "^2.0.1",
     "koa-router": "^7.2.1",
     "koa-views": "^6.0.2",
     "koa2-connect": "^1.0.2",
     "optics-agent": "^1.1.4",
     "pg": "^6.4.0",
+    "pino": "^4.7.0",
+    "pino-noir": "^1.2.0",
     "sqlite3": "^3.1.8",
     "uuid": "^3.1.0",
     "validate-commit-msg": "^2.12.2"
@@ -69,6 +76,7 @@
   "devDependencies": {
     "@playlyfe/gql": "^2.2.4",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
     "cz-conventional-changelog": "^2.0.0",
@@ -76,6 +84,7 @@
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-prettier": "^2.1.2",
     "flow-bin": "^0.49.1",
+    "jest": "^20.0.4",
     "prettier": "^1.5.2"
   },
   "config": {

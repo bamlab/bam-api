@@ -27,6 +27,13 @@ import jwksRsa from '@tychot/jwks-rsa';
 import koaViews from 'koa-views';
 // instrument graphql
 import OpticsAgent from 'optics-agent';
+// log information in a scalable way
+import logger from './middlewares/logger';
+// log sql query
+import knexMiddleware from './middlewares/knex';
+import knex from '../db';
+// add a request id to the response
+import koaRequestId from 'koa-requestid';
 
 // create a new app
 const app = new koa();
@@ -36,24 +43,21 @@ const router = new koaRouter();
 // use the helmet middleware, to offfer a bit of extra security
 app.use(helmet());
 
+// add request id to response and request state
+app.use(koaRequestId());
+app.use(async (ctx, next) => {
+  ctx.req.id = ctx.state.id;
+  await next();
+});
+
 // use the body middlleware, to decode the body of the request
 app.use(koaBody());
 
-const bunyan = require('bunyan');
-const koaBunyanLogger = require('koa-bunyan-logger');
-let logger = bunyan.createLogger({
-  name: 'website',
-  stream: process.stdout,
-  level: 'debug',
-  serializers: bunyan.stdSerializers,
-});
-logger.req = logger.child({
-  component: 'req',
-  level: 'info',
-});
-app.use(koaBunyanLogger(logger.req));
-app.use(koaBunyanLogger.requestIdContext());
-app.use(koaBunyanLogger.requestLogger());
+// use the loging middleware, to log request and log special event
+// app.silent = true;
+app.use(logger());
+
+app.use(knexMiddleware(knex));
 
 // use the ect template string for views
 import path from 'path';
