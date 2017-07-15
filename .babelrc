@@ -1,6 +1,8 @@
 {
-  "presets": [
-    "backpack-core/babel",
-    "flow"
-  ]
+  "presets": ["backpack-core/babel", "flow"],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
 }

@@ -1,5 +1,6 @@
 [ignore]
 <PROJECT_ROOT>/node_modules/findup/test/fixture/.*
+<PROJECT_ROOT>/node_modules/protobufjs-no-cli/src/bower.json
 
 [include]
 
