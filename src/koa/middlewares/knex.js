@@ -25,11 +25,16 @@ export default knex => async (ctx, next) => {
   };
 
   const logQueries = () => {
-    queries.forEach(query =>
+    queries.forEach(query => {
       ctx.log
         .child({ name: 'sql' })
-        .info('%s %s %s', query.sql, `{${query.bindings.join(', ')}}`, `${query.duration}ms`)
-    );
+        .info(
+          '%s %s %s',
+          query.sql.replace(/\\/g, ''),
+          `{${query.bindings.join(', ')}}`,
+          `${query.duration}ms`
+        );
+    });
   };
 
   knex.client.on('start', captureQueries);

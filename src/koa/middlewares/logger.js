@@ -21,10 +21,11 @@ const logger = (opts, stream) => {
     let logReq: object | string = {};
     switch (verboseLevel) {
       case 1:
-        logReq = `${ctx.req.id} ${ctx.req.method} ${ctx.request.url}`;
+        logReq = `${ctx.req.method} ${ctx.request.url} (req-id : "${ctx.req.id}")`;
         break;
       case 2:
         logReq.req = ctx.req;
+        break;
       case 0:
       default:
         break;
@@ -35,16 +36,17 @@ const logger = (opts, stream) => {
 
     await next();
 
-    const logRes = {};
+    let logRes: object | string = {};
 
     const responseTime = Date.now() - startTime;
     switch (verboseLevel) {
       case 1:
-        logRes.responseTime = responseTime;
+        logRes = `responded in ${responseTime}ms (req-id: "${ctx.req.id}")`;
         break;
       case 2:
         logRes.req = ctx.res;
         logRes.responseTime = responseTime;
+        break;
       case 0:
       default:
         break;
