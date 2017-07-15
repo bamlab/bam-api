@@ -54,7 +54,11 @@ app.use(async (ctx, next) => {
 app.use(koaBody());
 
 // use the loging middleware, to log request and log special event
-// app.silent = true;
+// override koa's undocumented error handler
+app.context.onerror = () => {};
+// specify that this is our api
+app.context.api = true;
+// use our logger middleware
 app.use(logger());
 
 app.use(knexMiddleware(knex));
@@ -83,11 +87,31 @@ app.use(OpticsAgent.koaMiddleware());
 import schema from '../presentation/schema';
 import getViewerAndRoles from '../business/utils/auth';
 
+import { formatErrorGenerator } from 'graphql-apollo-errors';
+
 // get the dataloader for each request
 import * as business from '../business';
 router.post(
   '/graphql',
   graphqlKoa(async ctx => {
+    // create error formatter
+    const formatErrorConfig = {
+      publicDataPath: 'public', // Only data under this path in the data object will be sent to the client (path parts should be separated by . - some.public.path)
+      showLocations: false, // whether to add the graphql locations to the final error (default false)
+      showPath: false, // whether to add the graphql path to the final error (default false)
+      hideSensitiveData: true, // whether to remove the data object from internal server errors (default true)
+      hooks: {
+        // This run on the error you really throw from your code (not the graphql error - it means not with path and locations)
+        onProcessedError: processedError => {
+          ctx.log.child({ name: 'gql' }).warn({
+            msg: `${processedError.output.payload.message} (${processedError.output.payload.guid})`,
+            stack: processedError.stack,
+          });
+          ctx.status = processedError.output.statusCode || 500;
+        },
+      },
+    };
+    const formatError = formatErrorGenerator(formatErrorConfig);
     const { user, roles } = await getViewerAndRoles(ctx.state.user);
     // build the data loader map, using reduce
     const dataloaders = Object.keys(business).reduce((dataloaders, loaderKey) => {
@@ -101,6 +125,7 @@ router.post(
       // instrument the schema
       schema: OpticsAgent.instrumentSchema(schema),
       context,
+      formatError,
     };
   })
 );

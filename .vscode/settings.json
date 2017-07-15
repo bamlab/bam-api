@@ -6,5 +6,6 @@
   "prettier.singleQuote": true,
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "es5",
-  "graphqlForVSCode.nodePath": "node_modules"
+  "graphqlForVSCode.nodePath": "node_modules",
+  "javascript.validate.enable": false
 }

@@ -1,5 +1,12 @@
 // @flow
 import * as queryBuilders from '../../db/queryBuilders';
+import { SevenBoom } from 'graphql-apollo-errors';
+
+export const ROLES = {
+  ANONYMOUS: 'ANONYMOUS',
+  NOT_REGISTRED: 'NOT_REGISTRED',
+  BAMER: 'BAMER',
+};
 
 export default async function getViewerAndRoles(
   requestUser: any
@@ -8,14 +15,14 @@ export default async function getViewerAndRoles(
   if (!requestUser) {
     return {
       user: null,
-      roles: ['ANONYMOUS'],
+      roles: [ROLES.ANONYMOUS],
     };
   }
   const user: ?BamerDBType = await queryBuilders.bamer.getByEmail(requestUser.email);
   if (!user) {
     return {
       user: null,
-      roles: ['NOT_REGISTRED'],
+      roles: [ROLES.NOT_REGISTRED],
     };
   }
   return {
@@ -26,14 +33,29 @@ export default async function getViewerAndRoles(
 
 export function getRolesByEmail(email: string): Array<string> {
   let roles = [];
-  if (/^\w+@bam\.tech$/.test(email)) {
+  const isBammerEmail = /^\w+@bam\.tech$/;
+  if (isBammerEmail.test(email)) {
     roles.push('BAMER');
   }
   return roles;
 }
 
 export function assertIsBamer(user: BamerDBType, roles: Array<string>) {
+  if (!roles.includes(ROLES.NOT_REGISTRED)) {
+    throw new SevenBoom.unauthorized(
+      `Please connect to use this functionality`,
+      {},
+      'ANONYMOUS_DISALOWED'
+    );
+  }
+  if (!roles.includes(ROLES.NOT_REGISTRED)) {
+    throw new SevenBoom.notFound(
+      `User with email ${user.email} is unregistred : please perform a registration mutation`,
+      { email: user.email },
+      'REGISTRED_USER_NOT_FOUND'
+    );
+  }
   if (!roles.includes('BAMER')) {
-    throw new Error('Must be connected with a bam email address to use the service');
+    throw new SevenBoom.forbidden('User should be a bamer', {}, 'FORBIDEN');
   }
 }
