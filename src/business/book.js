@@ -12,7 +12,7 @@ class Book {
   id: $PropertyType<BookDBType, 'id'>;
   name: $PropertyType<BookDBType, 'name'>;
   author: $PropertyType<BookDBType, 'author'>;
-  constructor(data: BookDBType) {
+  constructor(data: BookDBType, viewer: { id?: string }) {
     this.id = data.id;
     this.name = data.name;
     this.author = data.author;

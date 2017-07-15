@@ -96,15 +96,13 @@ router.post(
   graphqlKoa(async ctx => {
     // create error formatter
     const formatErrorConfig = {
-      publicDataPath: 'public', // Only data under this path in the data object will be sent to the client (path parts should be separated by . - some.public.path)
-      showLocations: false, // whether to add the graphql locations to the final error (default false)
-      showPath: false, // whether to add the graphql path to the final error (default false)
-      hideSensitiveData: true, // whether to remove the data object from internal server errors (default true)
+      publicDataPath: 'public',
       hooks: {
-        // This run on the error you really throw from your code (not the graphql error - it means not with path and locations)
         onProcessedError: processedError => {
+          const message = processedError.output.payload.message;
+          const guid = processedError.output.payload.guid;
           ctx.log.child({ name: 'gql' }).warn({
-            msg: `${processedError.output.payload.message} (${processedError.output.payload.guid})`,
+            msg: `${message} (error-id: "${guid}")`,
             stack: processedError.stack,
           });
           ctx.status = processedError.output.statusCode || 500;
@@ -125,6 +123,7 @@ router.post(
       // instrument the schema
       schema: OpticsAgent.instrumentSchema(schema),
       context,
+      debug: false,
       formatError,
     };
   })

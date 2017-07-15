@@ -35,27 +35,27 @@ export function getRolesByEmail(email: string): Array<string> {
   let roles = [];
   const isBammerEmail = /^\w+@bam\.tech$/;
   if (isBammerEmail.test(email)) {
-    roles.push('BAMER');
+    roles.push(ROLES.BAMER);
   }
   return roles;
 }
 
 export function assertIsBamer(user: BamerDBType, roles: Array<string>) {
-  if (!roles.includes(ROLES.NOT_REGISTRED)) {
-    throw new SevenBoom.unauthorized(
+  if (roles.includes(ROLES.NOT_REGISTRED)) {
+    throw SevenBoom.unauthorized(
       `Please connect to use this functionality`,
       {},
       'ANONYMOUS_DISALOWED'
     );
   }
-  if (!roles.includes(ROLES.NOT_REGISTRED)) {
-    throw new SevenBoom.notFound(
+  if (roles.includes(ROLES.NOT_REGISTRED)) {
+    throw SevenBoom.notFound(
       `User with email ${user.email} is unregistred : please perform a registration mutation`,
       { email: user.email },
       'REGISTRED_USER_NOT_FOUND'
     );
   }
-  if (!roles.includes('BAMER')) {
-    throw new SevenBoom.forbidden('User should be a bamer', {}, 'FORBIDEN');
+  if (!roles.includes(ROLES.BAMER)) {
+    throw SevenBoom.forbidden('User should be a bamer', {}, 'FORBIDEN');
   }
 }
