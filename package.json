@@ -5,7 +5,12 @@
   "description": "A GraphQL, 'production ready'™ api for internal use at bam, but open sourced as an example !",
   "main": "index.js",
   "homepage": "https://github.com/bamlab/bam-api",
-  "keywords": ["graphql", "knex", "postgres", "docker"],
+  "keywords": [
+    "graphql",
+    "knex",
+    "postgres",
+    "docker"
+  ],
   "bugs": {
     "url": "https://github.com/bamlab/bam-api/issues"
   },
@@ -78,9 +83,11 @@
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^3.19.0",
     "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-prettier": "^2.1.2",
     "flow-bin": "^0.50.0",
     "jest": "^20.0.4",
+    "object-hash": "^1.1.8",
     "prettier": "^1.5.3"
   },
   "config": {

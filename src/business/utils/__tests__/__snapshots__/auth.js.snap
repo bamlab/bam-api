@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth utils (unit) assertIsBammer should throw an error 1`] = `"User should be a bamer"`;
+
+exports[`auth utils (unit) assertIsBammer should throw an error 2`] = `"User should be a bamer"`;
+
+exports[`auth utils (unit) assertIsBammer should throw an error 3`] = `"Please connect to use this functionality"`;

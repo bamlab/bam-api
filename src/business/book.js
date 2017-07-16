@@ -12,6 +12,7 @@ class Book {
   id: $PropertyType<BookDBType, 'id'>;
   name: $PropertyType<BookDBType, 'name'>;
   author: $PropertyType<BookDBType, 'author'>;
+  // eslint-disable-next-line no-unused-vars
   constructor(data: BookDBType, viewer: { id?: string }) {
     this.id = data.id;
     this.name = data.name;
