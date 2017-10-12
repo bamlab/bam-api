@@ -211,6 +211,29 @@ apollo-codegen@0.15.2:
     source-map-support "^0.4.15"
     yargs "^8.0.1"
 
+apollo-engine-binary-darwin@^0.2017.10-19-gdc8304d2:
+  version "0.2017.10-19-gdc8304d2"
+  resolved "https://registry.yarnpkg.com/apollo-engine-binary-darwin/-/apollo-engine-binary-darwin-0.2017.10-19-gdc8304d2.tgz#06471be1296d82264575212d98012e92a4f82d1a"
+
+apollo-engine-binary-linux@^0.2017.10-19-gdc8304d2:
+  version "0.2017.10-19-gdc8304d2"
+  resolved "https://registry.yarnpkg.com/apollo-engine-binary-linux/-/apollo-engine-binary-linux-0.2017.10-19-gdc8304d2.tgz#a6033c43f067b320190f43d823cae1972562638a"
+
+apollo-engine-binary-windows@^0.2017.10-19-gdc8304d2:
+  version "0.2017.10-19-gdc8304d2"
+  resolved "https://registry.yarnpkg.com/apollo-engine-binary-windows/-/apollo-engine-binary-windows-0.2017.10-19-gdc8304d2.tgz#c3785e2fffc05e3bff66ef81061a75e983a8338f"
+
+apollo-engine@^0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/apollo-engine/-/apollo-engine-0.4.7.tgz#4ad04a423cf7481e755b540452cb8bfdd16d9e69"
+  dependencies:
+    request "^2.81.0"
+    stream-line-wrapper "^0.1.1"
+  optionalDependencies:
+    apollo-engine-binary-darwin "^0.2017.10-19-gdc8304d2"
+    apollo-engine-binary-linux "^0.2017.10-19-gdc8304d2"
+    apollo-engine-binary-windows "^0.2017.10-19-gdc8304d2"
+
 append-transform@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/append-transform/-/append-transform-0.4.0.tgz#d76ebf8ca94d276e247a36bad44a4b74ab611991"
@@ -311,6 +334,10 @@ async@^2.1.4:
   resolved "https://registry.yarnpkg.com/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   dependencies:
     lodash "^4.14.0"
+
+async@~0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -1187,12 +1214,6 @@ builtin-modules@^1.0.0:
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
-
-bytebuffer@~5:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/bytebuffer/-/bytebuffer-5.0.1.tgz#582eea4b1a873b6d020a48d58df85f0bba6cfddd"
-  dependencies:
-    long "~3"
 
 bytes@2.4.0:
   version "2.4.0"
@@ -2584,7 +2605,7 @@ graphql-server-module-graphiql@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/graphql-server-module-graphiql/-/graphql-server-module-graphiql-1.0.0.tgz#1b302481423f83b3c0f43cb30bfdc30bfe3d0a82"
 
-graphql-tools@^1, graphql-tools@^1.0.0:
+graphql-tools@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-1.1.0.tgz#8d86ea6997b0dea3089b62dc655e47146a663ebb"
   dependencies:
@@ -3839,10 +3860,6 @@ lodash@~4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.5.1.tgz#80e8a074ca5f3893a6b1c10b2a636492d710c316"
 
-long@~3:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/long/-/long-3.2.0.tgz#d821b7138ca1cb581c172990ef14db200b5c474b"
-
 longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
@@ -4232,7 +4249,7 @@ object.omit@^2.0.0:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
 
-on-finished@^2.1.0, on-finished@^2.3.0, on-finished@~2.3.0:
+on-finished@^2.1.0, on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
   dependencies:
@@ -4257,15 +4274,6 @@ onetime@^1.0.0:
 only@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/only/-/only-0.0.2.tgz#2afde84d03e50b9a8edc444e30610a70295edfb4"
-
-optics-agent@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/optics-agent/-/optics-agent-1.1.6.tgz#360789c94d259d644b7359b780758b5046250aeb"
-  dependencies:
-    graphql-tools "^1"
-    on-finished "^2.3.0"
-    protobufjs-no-cli "^5.0.1"
-    request "^2.74.0"
 
 optimist@0.4.0:
   version "0.4.0"
@@ -4642,12 +4650,6 @@ promise-retry@1.1.1:
     err-code "^1.0.0"
     retry "^0.10.0"
 
-protobufjs-no-cli@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/protobufjs-no-cli/-/protobufjs-no-cli-5.0.1.tgz#17a527da0bc49f1f974f512d852950be26acbb82"
-  dependencies:
-    bytebuffer "~5"
-
 prr@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/prr/-/prr-0.0.0.tgz#1a84b85908325501411853d0081ee3fa86e2926a"
@@ -4905,7 +4907,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@^2.73.0, request@^2.74.0, request@^2.79.0, request@^2.81.0:
+request@^2.73.0, request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -5270,6 +5272,12 @@ stream-http@^2.3.1:
     readable-stream "^2.2.6"
     to-arraybuffer "^1.0.0"
     xtend "^4.0.0"
+
+stream-line-wrapper@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/stream-line-wrapper/-/stream-line-wrapper-0.1.1.tgz#3e2be1d368c6356f90aeef64786683f3eee3eea7"
+  dependencies:
+    async "~0.2.10"
 
 stream-shift@^1.0.0:
   version "1.0.0"

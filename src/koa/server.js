@@ -26,7 +26,7 @@ import jwksRsa from '@tychot/jwks-rsa';
 // import view to render the static login page
 import koaViews from 'koa-views';
 // instrument graphql
-import OpticsAgent from 'optics-agent';
+import { Engine } from 'apollo-engine';
 // log information in a scalable way
 import logger from './middlewares/logger';
 // log sql query
@@ -73,6 +73,14 @@ app.use(
   })
 );
 
+const engine = new Engine({
+  engineConfig: { apiKey: 'service:tychota-Bam-Api:1Z3thyxiVF84L4nF97NUmw' },
+  graphqlPort: 3000, // GraphQL port
+  endpoint: '/graphql', // GraphQL endpoint suffix - '/graphql' by default
+  dumpTraffic: true,
+});
+engine.start();
+
 // configure jwt middleware to connect to auth0, check the token and
 const jwtConfig = {
   secret: jwksRsa.koaJwtSecret(config.get('Security.jwks')),
@@ -81,7 +89,7 @@ const jwtConfig = {
 };
 app.use(koaJwt(jwtConfig));
 
-app.use(OpticsAgent.koaMiddleware());
+app.use(engine.koaMiddleware());
 
 // import the schema and mount it under /graphql
 import schema from '../presentation/schema';
@@ -116,15 +124,15 @@ router.post(
       return { ...dataloaders, [loaderKey]: business[loaderKey].getLoaders() };
     }, {});
     // create an optic context
-    const opticsContext = OpticsAgent.context(ctx.request);
     // create a context for each request
-    const context = { dataloaders, user, roles, opticsContext };
+    const context = { dataloaders, user, roles };
     return {
       // instrument the schema
-      schema: OpticsAgent.instrumentSchema(schema),
+      schema,
       context,
       debug: false,
       formatError,
+      tracing: true,
     };
   })
 );
@@ -148,4 +156,4 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 // start the app and listen to incomming request
-app.listen(config.get('Server.port'));
+app.listen(3001);

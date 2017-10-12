@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@tychot/jwks-rsa": "1.1.2",
+    "apollo-engine": "^0.4.7",
     "backpack-core": "^0.4.0-rc1",
     "casual": "^1.5.14",
     "config": "^1.25.1",
@@ -66,7 +67,6 @@
     "koa-router": "^7.2.1",
     "koa-views": "^6.0.2",
     "koa2-connect": "^1.0.2",
-    "optics-agent": "^1.1.6",
     "pg": "^6.4.1",
     "pino": "^4.7.0",
     "pino-noir": "^1.2.0",
